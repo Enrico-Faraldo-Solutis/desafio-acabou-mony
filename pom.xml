@@ -10,8 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>conta</module>
-        <module>transacao</module>
-        <module>usuario</module>
+        <module>acabou-mony-account</module>
+        <module>acabou-mony-transaction</module>
+        <module>acabou-mony-auth</module>
+        <module>acabou-mony-gateway</module>
     </modules>
 </project>
