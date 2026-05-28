@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/acabou-mony-account/pom.xml" />
         <option value="$PROJECT_DIR$/acabou-mony-auth/pom.xml" />
         <option value="$PROJECT_DIR$/acabou-mony-transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/acabou-mony-notificacao/pom.xml" />
       </list>
     </option>
   </component>

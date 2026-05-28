@@ -14,5 +14,6 @@
         <module>acabou-mony-transaction</module>
         <module>acabou-mony-auth</module>
         <module>acabou-mony-gateway</module>
+        <module>acabou-mony-notificacao</module>
     </modules>
 </project>
