@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>acabou-mony-account</artifactId>
+	<artifactId>acabou-mony-auditing</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>

@@ -1,4 +1,4 @@
-package com.example.acabou_mony_account.config;
+package com.example.acabou_mony_transaction.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

@@ -10,6 +10,8 @@
         <option value="$PROJECT_DIR$/acabou-mony-auth/pom.xml" />
         <option value="$PROJECT_DIR$/acabou-mony-transaction/pom.xml" />
         <option value="$PROJECT_DIR$/acabou-mony-notificacao/pom.xml" />
+        <option value="$PROJECT_DIR$/acabou-mony-auditing/pom.xml" />
+        <option value="$PROJECT_DIR$/acabou-mony-card/pom.xml" />
       </list>
     </option>
   </component>
