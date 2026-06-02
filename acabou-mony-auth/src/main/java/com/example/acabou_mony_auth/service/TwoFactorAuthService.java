@@ -27,12 +27,11 @@ public class TwoFactorAuthService {
 
     @Transactional
     public void gerarEEnviarCodigo(Long usuarioId, String email) {
-        // 🌟 Buscando códigos ativos e invalidando direto pelo ecossistema do JPA
         List<Codigo2FA> codigosAtivos = codigo2FARepository.findByUsuarioIdAndUtilizadoFalse(usuarioId);
         codigosAtivos.forEach(codigo -> codigo.setUtilizado(true));
         codigo2FARepository.saveAll(codigosAtivos);
 
-        // Gera código de 6 dígitos
+
         String codigo = String.format("%06d", secureRandom.nextInt(1_000_000));
 
         Codigo2FA codigo2FA = new Codigo2FA();
@@ -48,7 +47,7 @@ public class TwoFactorAuthService {
 
     @Transactional
     public void validarCodigo(Long usuarioId, String codigo) {
-        // Usando o método derivado do Spring Data para pegar o último ativo
+
         Codigo2FA codigo2FA = codigo2FARepository
                 .findFirstByUsuarioIdAndUtilizadoFalseOrderByIdDesc(usuarioId)
                 .orElseThrow(() -> new AuthException("Nenhum código 2FA ativo encontrado. Faça login novamente."));

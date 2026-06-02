@@ -1,6 +1,8 @@
 package com.example.acabou_mony_auth.service;
 
 import com.example.acabou_mony_auth.exception.AuthException;
+import com.example.acabou_mony_auth.repository.UsuarioRepository;
+import com.example.acabou_mony_auth.entity.Usuario;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -8,31 +10,37 @@ public class AuthService {
 
     private final TwoFactorAuthService twoFactorAuthService;
     private final JwtService jwtService;
+    private final UsuarioRepository usuarioRepository;
 
-    public AuthService(TwoFactorAuthService twoFactorAuthService, JwtService jwtService) {
+    public AuthService(TwoFactorAuthService twoFactorAuthService, JwtService jwtService, UsuarioRepository usuarioRepository) {
         this.twoFactorAuthService = twoFactorAuthService;
         this.jwtService = jwtService;
+        this.usuarioRepository = usuarioRepository;
     }
 
     public Long processarLoginIncial(String email, String senha) {
-        // Validação básica de credenciais (Futuramente batendo no UsuarioRepository)
-        if (!"ana@mony.com".equals(email) || !"123456".equals(senha)) {
+        Usuario usuario = usuarioRepository.findByEmail(email)
+                .orElseThrow(() -> new AuthException("E-mail ou senha inválidos."));
+
+
+        if (!usuario.getSenhaHash().equals(senha)) {
             throw new AuthException("E-mail ou senha inválidos.");
         }
 
-        Long usuarioId = 1L; // ID simulado da Ana
+        Long usuarioId = usuario.getId();
 
-        //Delegando a geração e envio para o seu novo service
         twoFactorAuthService.gerarEEnviarCodigo(usuarioId, email);
 
         return usuarioId;
     }
 
     public String validar2FAeGerarToken(Long usuarioId, String codigo) {
-        //Delegando a validação rígida do código para o seu novo service
         twoFactorAuthService.validarCodigo(usuarioId, codigo);
 
-        // Se o método acima não lançar exception, o código é válido. Geramos o Token!
-        return jwtService.gerarToken(usuarioId, "ana@mony.com");
+        String emailUsuario = usuarioRepository.findById(usuarioId)
+                .map(Usuario::getEmail)
+                .orElseThrow(() -> new AuthException("Usuário não encontrado."));
+
+        return jwtService.gerarToken(usuarioId, emailUsuario);
     }
 }
