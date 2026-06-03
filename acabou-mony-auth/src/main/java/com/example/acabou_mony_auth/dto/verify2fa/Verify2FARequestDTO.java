@@ -1,4 +1,4 @@
-package com.example.acabou_mony_auth.dto.validacao;
+package com.example.acabou_mony_auth.dto.verify2fa;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Validacao2FARequestDTO {
+public class Verify2FARequestDTO {
     private Long usuarioId;
     private String codigo;
 }
