@@ -10,6 +10,7 @@ import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -22,25 +23,34 @@ public class ClienteConsumer {
     @Value("${sendgrid.from-email}")
     private String fromEmail;
 
-    @RabbitListener(queues = "cliente.cadastro.queue")
+    @RabbitListener(queues = "am.notificacao.usuario-criado")
     public void consumir(Map<String, Object> dados) {
         String emailDestinatario = (String) dados.get("email");
         String nomeDestinatario = (String) dados.get("nome");
 
-        System.out.println("Notificação recebida. Iniciando envio de e-mail para: " + emailDestinatario);
+        String idUsuario = String.valueOf(dados.get("id"));
 
-        // Dispara o e-mail real
-        enviarEmailReal(emailDestinatario, nomeDestinatario);
+        System.out.println("=================================================");
+        System.out.println("Notificação recebida. Enviando e-mail da Fintech para: " + emailDestinatario);
+        System.out.println("=================================================");
+
+        enviarEmailFintech(emailDestinatario, nomeDestinatario, idUsuario);
     }
 
-    private void enviarEmailReal(String para, String nome) {
+    private void enviarEmailFintech(String para, String nome, String idUsuario) {
         Email from = new Email(fromEmail);
-        String subject = "Bem-vindo à nossa Locadora de Carros!";
+        String subject = "Sua conta no Acabou o Mony foi aberta! 🎉";
         Email to = new Email(para);
 
-        String textoMensagem = String.format("Olá %s,\n\nSeu cadastro como motorista foi realizado com sucesso! Você já pode usar nosso sistema para alugar veículos.", nome);
-        Content content = new Content("text/plain", textoMensagem);
+        String textoMensagem = String.format(
+                "Olá %s,\n\n" +
+                        "Seja muito bem-vindo à Fintech Acabou o Mony!\n\n" +
+                        "Sua conta digital foi criada com sucesso (ID: %s) e já está pronta para receber depósitos e transações.\n\n" +
+                        "Bons investimentos,\nEquipe Acabou o Mony.",
+                nome, idUsuario
+        );
 
+        Content content = new Content("text/plain", textoMensagem);
         Mail mail = new Mail(from, subject, to, content);
         SendGrid sg = new SendGrid(apiKey);
         Request request = new Request();
@@ -54,7 +64,7 @@ public class ClienteConsumer {
 
             System.out.println("[SendGrid] Status Code: " + response.getStatusCode());
             if (response.getStatusCode() >= 200 && response.getStatusCode() < 300) {
-                System.out.println("[SendGrid] E-mail enviado com sucesso para " + para);
+                System.out.println("[SendGrid] E-mail de boas-vindas enviado para " + para);
             } else {
                 System.err.println("[SendGrid] Erro ao enviar: " + response.getBody());
             }
