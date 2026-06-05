@@ -6,6 +6,8 @@ import com.example.acabou_mony_auth.repository.Codigo2FARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +20,15 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TwoFactorAuthService {
 
+    private final JavaMailSender mailSender; // Componente real de e-mail
+
+    public TwoFactorAuthService(JavaMailSender mailSender, Codigo2FARepository codigo2FARepository) {
+        this.mailSender = mailSender;
+        this.codigo2FARepository = codigo2FARepository;
+    }
+
     private final Codigo2FARepository codigo2FARepository;
+
 
     @Value("${twofa.expiration.minutes:5}")
     private int expiracaoMinutos;
@@ -43,7 +53,7 @@ public class TwoFactorAuthService {
 
         codigo2FARepository.save(codigo2FA);
 
-        simularEnvio(email, codigo);
+        enviarEmailReal(email, codigo);
     }
 
     @Transactional
@@ -65,12 +75,13 @@ public class TwoFactorAuthService {
         codigo2FARepository.save(codigo2FA);
     }
 
-    private void simularEnvio(String email, String codigo) {
-        log.info("======================================================");
-        log.info("  [SIMULAÇÃO DE E-MAIL/SMS]");
-        log.info("  Destinatário : {}", email);
-        log.info("  Código 2FA   : {}", codigo);
-        log.info("  Expira em    : {} minuto(s)", expiracaoMinutos);
-        log.info("======================================================");
+    private void enviarEmailReal(String email, String codigo) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("nao-responda@acaboumony.com.br");
+        message.setTo(email);
+        message.setSubject("Seu Código de Verificação Mony");
+        message.setText("Olá! Seu código 2FA para acessar o Acabou o Mony é: " + codigo);
+
+        mailSender.send(message); // Dispara o e-mail de verdade para a internet!
     }
 }
