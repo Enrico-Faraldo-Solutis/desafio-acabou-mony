@@ -35,7 +35,6 @@ public class AuthWebFilter implements WebFilter {
 
     public AuthWebFilter(@Value("${jwt.secret}") String secretKeyBase64) {
         try {
-            // jjwt 0.12.x usa Decoders.BASE64 em vez de Base64.getDecoder()
             this.secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKeyBase64));
         } catch (Exception e) {
             logger.error("Erro ao decodificar a chave secreta: {}", e.getMessage());
@@ -64,16 +63,13 @@ public class AuthWebFilter implements WebFilter {
         String token = authHeader.substring(7);
 
         try {
-            // jjwt 0.12.x: parser() + verifyWith() + parseSignedClaims()
-            // Substitui o antigo: parserBuilder() + setSigningKey() + parseClaimsJws()
             Claims claims = Jwts.parser()
                     .verifyWith(secretKey)
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();
 
-            // Propaga dados do usuário como headers internos para os microsserviços downstream
-            // Assim cada serviço sabe quem fez a requisição sem precisar validar o JWT novamente
+
             ServerWebExchange exchangeComUsuario = exchange.mutate()
                     .request(r -> r
                             .header("X-User-Id",    claims.getSubject())
