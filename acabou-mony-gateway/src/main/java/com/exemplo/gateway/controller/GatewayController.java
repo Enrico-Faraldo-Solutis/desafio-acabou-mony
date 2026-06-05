@@ -1,6 +1,6 @@
 package com.exemplo.gateway.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.util.MultiValueMap;
@@ -13,6 +13,22 @@ import reactor.core.publisher.Mono;
 public class GatewayController {
 
     private final WebClient webClient;
+
+    // URLs injetadas do application.properties — sem hardcode de porta
+    @Value("${services.auth.url}")
+    private String authUrl;
+
+    @Value("${services.account.url}")
+    private String accountUrl;
+
+    @Value("${services.card.url}")
+    private String cardUrl;
+
+    @Value("${services.transaction.url}")
+    private String transactionUrl;
+
+    @Value("${services.auditing.url}")
+    private String auditingUrl;
 
     public GatewayController() {
         this.webClient = WebClient.builder().build();
@@ -32,16 +48,21 @@ public class GatewayController {
             @RequestBody(required = false) Mono<String> body,
             ServerHttpRequest request) {
 
+        // Mapeia o segmento da URL para a URL base do microsserviço correspondente
         String baseUrl = switch (service) {
-            case "cliente-service" -> "http://localhost:8080";
-            case "veiculo-service" -> "http://localhost:8081";
-            case "locacao-service" -> "http://localhost:8082";
-            case "usuario-service" -> "http://localhost:8083";
-            case "notificacao-service" -> "http://localhost:8084";
-            default -> null;
+            case "auth"         -> authUrl;
+            case "accounts"     -> accountUrl;
+            case "cards"        -> cardUrl;
+            case "transactions" -> transactionUrl;
+            case "auditing"     -> auditingUrl;
+            default             -> null;
         };
 
-        if (baseUrl == null) return Mono.just(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Serviço não encontrado"));
+        if (baseUrl == null) {
+            return Mono.just(ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Serviço não encontrado: " + service));
+        }
 
         String fullPath = request.getURI().getRawPath().replace("/api/" + service, "");
 
