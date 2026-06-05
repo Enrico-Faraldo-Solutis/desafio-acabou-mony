@@ -15,10 +15,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
         <module name="acabou-mony-card" />
+        <module name="acabou-mony-transaction" />
         <module name="acabou-mony-account" />
+        <module name="acabou-mony-auditing" />
+        <module name="acabou-mony-notificacao" />
+        <module name="acabou-mony-auth" />
       </profile>
       <profile name="Annotation profile for acabou-mony-auditing" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -62,6 +65,7 @@
       <module name="acabou-mony-transaction (1) (com.example)" target="21" />
       <module name="acabou-mony-transaction (2)" target="21" />
       <module name="acabou-mony-transaction (3)" target="1.5" />
+      <module name="acabou-o-mony-api" target="21" />
       <module name="conta" target="21" />
       <module name="transacao" target="21" />
       <module name="usuario" target="21" />
