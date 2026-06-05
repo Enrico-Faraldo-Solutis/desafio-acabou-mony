@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -14,13 +15,46 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
         </processorPath>
         <module name="acabou-mony-card" />
-        <module name="acabou-mony-transaction" />
         <module name="acabou-mony-account" />
+      </profile>
+      <profile name="Annotation profile for acabou-mony-auditing" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
         <module name="acabou-mony-auditing" />
-        <module name="acabou-mony-notificacao" />
+      </profile>
+      <profile name="Annotation profile for acabou-mony-auth" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
         <module name="acabou-mony-auth" />
+      </profile>
+      <profile name="Annotation profile for acabou-mony-notificacao" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
+        <module name="acabou-mony-notificacao" />
+      </profile>
+      <profile name="Annotation profile for acabou-mony-transaction" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
+        <module name="acabou-mony-transaction" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -28,8 +62,9 @@
       <module name="acabou-mony-transaction (1) (com.example)" target="21" />
       <module name="acabou-mony-transaction (2)" target="21" />
       <module name="acabou-mony-transaction (3)" target="1.5" />
-      <module name="acabou-o-mony-api" target="21" />
+      <module name="conta" target="21" />
       <module name="transacao" target="21" />
+      <module name="usuario" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
