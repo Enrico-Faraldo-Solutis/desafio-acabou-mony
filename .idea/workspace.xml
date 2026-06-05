@@ -5,29 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/ApiGatewayApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/ApiGatewayApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/controller/GatewayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/controller/GatewayController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/filter/AuthWebFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/filter/AuthWebFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-auditing/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auditing/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-card/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-card/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/NotificacaoServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/NotificacaoServiceApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/config/RabbitMQConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/config/RabbitMQConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/consumer/ClienteConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/consumer/ClienteConsumer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/AcabouMonyTransactionApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/AcabouMonyTransactionApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/client/AccountClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/client/AccountClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/controller/TransacaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/controller/TransacaoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/conta/ContaEspelhoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/conta/ContaEspelhoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/transacao/TransacaoResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/transacao/TransacaoResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/transacao/TransacaoResquestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/transacao/TransacaoResquestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/entity/Transacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/entity/Transacao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/mapper/TransacaoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/mapper/TransacaoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/repository/TransacaoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/repository/TransacaoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/service/TransacaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/service/TransacaoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/test/java/com/example/acabou_mony_auth/AcabouMonyAuthApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/test/java/com/example/acabou_mony_transaction/AcabouMonyTransactionApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,24 +37,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;Spring Boot.AcabouMonyTransactionApplication.executor&quot;: &quot;Run&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Feat/transaction&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.AcabouMonyAccountApplication.executor": "Run",
+    "Spring Boot.AcabouMonyAuditingApplication.executor": "Run",
+    "Spring Boot.AcabouMonyAuthApplication.executor": "Run",
+    "Spring Boot.AcabouMonyCardApplication.executor": "Run",
+    "Spring Boot.AcabouMonyTransactionApplication.executor": "Run",
+    "Spring Boot.NotificacaoServiceApplication.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "Feat/transaction",
+    "kotlin-language-version-configured": "true",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -82,7 +74,12 @@
         <entry key="SpringBootApplicationConfigurationType">
           <value>
             <map>
+              <entry key="AcabouMonyAccountApplication" value="STOPPED" />
+              <entry key="AcabouMonyAuditingApplication" value="STOPPED" />
+              <entry key="AcabouMonyAuthApplication" value="FAILED" />
+              <entry key="AcabouMonyCardApplication" value="STOPPED" />
               <entry key="AcabouMonyTransactionApplication" value="STOPPED" />
+              <entry key="NotificacaoServiceApplication" value="FAILED" />
             </map>
           </value>
         </entry>
@@ -91,6 +88,10 @@
   </component>
   <component name="RunManager" selected="Spring Boot.AcabouMonyTransactionApplication">
     <configuration name="AcabouMonyAccountApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
       <module name="acabou-mony-account" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_account.AcabouMonyAccountApplication" />
       <method v="2">
@@ -98,6 +99,10 @@
       </method>
     </configuration>
     <configuration name="AcabouMonyAuditingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
       <module name="acabou-mony-auditing" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_auditing.AcabouMonyAuditingApplication" />
       <method v="2">
@@ -106,12 +111,19 @@
     </configuration>
     <configuration name="AcabouMonyAuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="acabou-mony-auth" />
+      <selectedOptions>
+        <option name="environmentVariables" />
+      </selectedOptions>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_auth.AcabouMonyAuthApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="AcabouMonyCardApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
       <module name="acabou-mony-card" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_card.AcabouMonyCardApplication" />
       <method v="2">
@@ -119,6 +131,10 @@
       </method>
     </configuration>
     <configuration name="AcabouMonyTransactionApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
       <module name="acabou-mony-transaction" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_transaction.AcabouMonyTransactionApplication" />
       <method v="2">
@@ -133,12 +149,25 @@
       </method>
     </configuration>
     <configuration name="NotificacaoServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
       <module name="acabou-mony-notificacao" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.notificacao_service.NotificacaoServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Spring Boot.AcabouMonyAccountApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyAuditingApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyAuthApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyCardApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyTransactionApplication" />
+      <item itemvalue="Spring Boot.ApiGatewayApplication" />
+      <item itemvalue="Spring Boot.NotificacaoServiceApplication" />
+    </list>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -150,7 +179,8 @@
       <workItem from="1780317742924" duration="140000" />
       <workItem from="1780323306979" duration="466000" />
       <workItem from="1780337797381" duration="1643000" />
-      <workItem from="1780668277813" duration="3107000" />
+      <workItem from="1780668277813" duration="5365000" />
+      <workItem from="1780680815874" duration="2435000" />
     </task>
     <servers />
   </component>
