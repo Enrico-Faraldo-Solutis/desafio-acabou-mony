@@ -29,6 +29,7 @@
       <module name="acabou-mony-transaction (1) (com.example)" target="21" />
       <module name="acabou-mony-transaction (2)" target="21" />
       <module name="acabou-mony-transaction (3)" target="1.5" />
+      <module name="acabou-o-mony-api" target="21" />
       <module name="conta" target="21" />
       <module name="transacao" target="21" />
       <module name="usuario" target="21" />
