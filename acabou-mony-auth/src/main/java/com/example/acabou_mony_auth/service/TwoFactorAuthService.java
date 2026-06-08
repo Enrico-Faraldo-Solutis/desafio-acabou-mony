@@ -20,15 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TwoFactorAuthService {
 
-    private final JavaMailSender mailSender; // Componente real de e-mail
-
-    public TwoFactorAuthService(JavaMailSender mailSender, Codigo2FARepository codigo2FARepository) {
-        this.mailSender = mailSender;
-        this.codigo2FARepository = codigo2FARepository;
-    }
-
+    private final JavaMailSender mailSender;
     private final Codigo2FARepository codigo2FARepository;
-
 
     @Value("${twofa.expiration.minutes:5}")
     private int expiracaoMinutos;
@@ -40,7 +33,6 @@ public class TwoFactorAuthService {
         List<Codigo2FA> codigosAtivos = codigo2FARepository.findByUsuarioIdAndUtilizadoFalse(usuarioId);
         codigosAtivos.forEach(codigo -> codigo.setUtilizado(true));
         codigo2FARepository.saveAll(codigosAtivos);
-
 
         String codigo = String.format("%06d", secureRandom.nextInt(1_000_000));
 
@@ -57,7 +49,6 @@ public class TwoFactorAuthService {
 
     @Transactional
     public void validarCodigo(Long usuarioId, String codigo) {
-
         Codigo2FA codigo2FA = codigo2FARepository
                 .findFirstByUsuarioIdAndUtilizadoFalseOrderByIdDesc(usuarioId)
                 .orElseThrow(() -> new AuthException("Nenhum código 2FA ativo encontrado. Faça login novamente."));
@@ -76,11 +67,11 @@ public class TwoFactorAuthService {
 
     private void enviarEmailReal(String email, String codigo) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("nao-responda@acaboumony.com.br");
+        message.setFrom("nao-responda@acaboumony.com");
         message.setTo(email);
         message.setSubject("Seu Código de Verificação Mony");
         message.setText("Olá! Seu código 2FA para acessar o Acabou o Mony é: " + codigo);
 
-        mailSender.send(message); // Dispara o e-mail de verdade para a internet!
+        mailSender.send(message);
     }
 }
