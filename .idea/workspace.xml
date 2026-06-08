@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-auditing/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auditing/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-card/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-card/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/NotificacaoServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/NotificacaoServiceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/config/RabbitMQConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/config/RabbitMQConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/consumer/ClienteConsumer.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/com/example/notificacao_service/consumer/ClienteConsumer.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="3EXGwKBsJrsQJDl84azfgr5kJU6" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.AcabouMonyAccountApplication.executor": "Run",
+    "Spring Boot.AcabouMonyAuditingApplication.executor": "Run",
+    "Spring Boot.AcabouMonyAuthApplication.executor": "Run",
+    "Spring Boot.AcabouMonyCardApplication.executor": "Run",
+    "Spring Boot.AcabouMonyTransactionApplication.executor": "Run",
+    "Spring Boot.NotificacaoServiceApplication.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "Feat/transaction",
+    "kotlin-language-version-configured": "true",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <map>
+              <entry key="AcabouMonyAccountApplication" value="STOPPED" />
+              <entry key="AcabouMonyAuditingApplication" value="STOPPED" />
+              <entry key="AcabouMonyAuthApplication" value="FAILED" />
+              <entry key="AcabouMonyCardApplication" value="STOPPED" />
+              <entry key="AcabouMonyTransactionApplication" value="STOPPED" />
+              <entry key="NotificacaoServiceApplication" value="FAILED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.AcabouMonyTransactionApplication">
+    <configuration name="AcabouMonyAccountApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
+      <module name="acabou-mony-account" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_account.AcabouMonyAccountApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AcabouMonyAuditingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
+      <module name="acabou-mony-auditing" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_auditing.AcabouMonyAuditingApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AcabouMonyAuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="acabou-mony-auth" />
+      <selectedOptions>
+        <option name="environmentVariables" />
+      </selectedOptions>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_auth.AcabouMonyAuthApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AcabouMonyCardApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
+      <module name="acabou-mony-card" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_card.AcabouMonyCardApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AcabouMonyTransactionApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
+      <module name="acabou-mony-transaction" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_transaction.AcabouMonyTransactionApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="acabou-mony-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.exemplo.gateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotificacaoServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="DB_USER" value="root" />
+        <env name="DB_PASSWORD" value="solutis" />
+      </envs>
+      <module name="acabou-mony-notificacao" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.notificacao_service.NotificacaoServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.AcabouMonyAccountApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyAuditingApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyAuthApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyCardApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyTransactionApplication" />
+      <item itemvalue="Spring Boot.ApiGatewayApplication" />
+      <item itemvalue="Spring Boot.NotificacaoServiceApplication" />
+    </list>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="" />
+      <created>1780317740185</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1780317740185</updated>
+      <workItem from="1780317742924" duration="140000" />
+      <workItem from="1780323306979" duration="466000" />
+      <workItem from="1780337797381" duration="1643000" />
+      <workItem from="1780668277813" duration="5365000" />
+      <workItem from="1780680815874" duration="2435000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
