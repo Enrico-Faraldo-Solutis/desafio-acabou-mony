@@ -23,12 +23,11 @@ public class AuthService {
                 .orElseThrow(() -> new AuthException("E-mail ou senha inválidos."));
 
 
-        if (!usuario.getSenhaHash().equals(senha)) {
+        if (!org.springframework.security.crypto.bcrypt.BCrypt.checkpw(senha, usuario.getSenhaHash())) {
             throw new AuthException("E-mail ou senha inválidos.");
         }
 
         Long usuarioId = usuario.getId();
-
         twoFactorAuthService.gerarEEnviarCodigo(usuarioId, email);
 
         return usuarioId;
