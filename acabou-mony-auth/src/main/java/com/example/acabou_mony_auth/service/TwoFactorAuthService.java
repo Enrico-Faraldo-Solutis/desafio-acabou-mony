@@ -5,6 +5,7 @@ import com.example.acabou_mony_auth.exception.AuthException;
 import com.example.acabou_mony_auth.repository.Codigo2FARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,16 +14,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class TwoFactorAuthService {
 
-    private final JavaMailSender mailSender;
     private final Codigo2FARepository codigo2FARepository;
-
+    private final RabbitTemplate rabbitTemplate;
     @Value("${twofa.expiration.minutes:5}")
     private int expiracaoMinutos;
 
@@ -44,7 +46,20 @@ public class TwoFactorAuthService {
 
         codigo2FARepository.save(codigo2FA);
 
-        enviarEmailReal(email, codigo);
+        // 🌟 2. A MÁGICA DO ENVIO AUTOMÁTICO ACONTECE AQUI:
+        try {
+            Map<String, Object> dados2FA = new HashMap<>();
+            dados2FA.put("email", email);
+            dados2FA.put("codigo", codigo);
+            dados2FA.put("nome", "Cliente Acabou o Mony"); // Nome genérico já que o método não recebe o nome
+
+            // Envia direto para a fila de 2FA usando a Exchange padrão ("")
+            rabbitTemplate.convertAndSend("", "am.notificacao.2fa-solicitado", dados2FA);
+
+            log.info(" [2FA] Evento de código enviado para o RabbitMQ com sucesso!");
+        } catch (Exception e) {
+            log.error(" [2FA] Erro ao enviar código para o RabbitMQ: {}", e.getMessage());
+        }
     }
 
     @Transactional
@@ -63,15 +78,5 @@ public class TwoFactorAuthService {
 
         codigo2FA.setUtilizado(true);
         codigo2FARepository.save(codigo2FA);
-    }
-
-    private void enviarEmailReal(String email, String codigo) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("nao-responda@acaboumony.com");
-        message.setTo(email);
-        message.setSubject("Seu Código de Verificação Mony");
-        message.setText("Olá! Seu código 2FA para acessar o Acabou o Mony é: " + codigo);
-
-        mailSender.send(message);
     }
 }
