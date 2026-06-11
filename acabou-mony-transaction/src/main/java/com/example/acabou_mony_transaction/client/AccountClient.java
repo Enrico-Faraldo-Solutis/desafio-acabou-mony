@@ -1,5 +1,6 @@
 package com.example.acabou_mony_transaction.client;
 
+import com.example.acabou_mony_transaction.dto.conta.AtualizarSaldoRequestDto;
 import com.example.acabou_mony_transaction.dto.conta.ContaEspelhoDto;
 import com.example.acabou_mony_transaction.exception.AccountServiceUnavailableException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
@@ -74,7 +75,26 @@ public class AccountClient {
         log.info("Updating balance for account: {}", contaId);
         String url = accountServiceUrl + "/api/accounts/balance";
         try {
-            ContaEspelhoDto updated = restTemplate.postForObject(url, contaEspelhoDto, ContaEspelhoDto.class);
+            // 1. Monta o payload com as propriedades 'contaId' e 'valor' que o Account espera
+            // Nota: certifique-se se 'valor' lá no Account significa o NOVO SALDO (contaEspelhoDto.getSaldo())
+            // ou se significa o VALOR DA TRANSAÇÃO (o delta a ser somado/subtraído).
+            AtualizarSaldoRequestDto payload = new AtualizarSaldoRequestDto(
+                    contaId,
+                    contaEspelhoDto.getSaldo()
+            );
+
+            // 2. Coloca o payload correto na entidade da requisição
+            org.springframework.http.HttpEntity<AtualizarSaldoRequestDto> requestEntity = new org.springframework.http.HttpEntity<>(payload);
+
+            // 3. Dispara o PUT
+            org.springframework.http.ResponseEntity<ContaEspelhoDto> response = restTemplate.exchange(
+                    url,
+                    org.springframework.http.HttpMethod.PUT,
+                    requestEntity,
+                    ContaEspelhoDto.class
+            );
+
+            ContaEspelhoDto updated = response.getBody();
             log.info("Balance updated successfully for account: {}", contaId);
             return updated;
         } catch (RestClientException e) {
@@ -82,7 +102,6 @@ public class AccountClient {
             throw new AccountServiceUnavailableException("Account service unavailable", e);
         }
     }
-
     /**
      * Fallback method for updateBalance when circuit breaker is open
      *
