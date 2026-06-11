@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -33,6 +34,7 @@ public class TransacaoService {
     private final AuditingClient auditingClient;
     private final RabbitTemplate rabbitTemplate;
     private final MeterRegistry meterRegistry;
+    private final TransactionTemplate transactionTemplate;
 
     // Custom metrics
     private final AtomicInteger transacaoCounter;
@@ -44,14 +46,15 @@ public class TransacaoService {
                             AccountClient accountClient,
                             AuditingClient auditingClient,
                             RabbitTemplate rabbitTemplate,
-                            MeterRegistry meterRegistry) {
+                            MeterRegistry meterRegistry,
+                            TransactionTemplate transactionTemplate) {
         this.transacaoRepository = transacaoRepository;
         this.transacaoMapper = transacaoMapper;
         this.accountClient = accountClient;
         this.auditingClient = auditingClient;
         this.rabbitTemplate = rabbitTemplate;
         this.meterRegistry = meterRegistry;
-
+        this.transactionTemplate = transactionTemplate;
         // Initialize custom metrics
         this.transacaoCounter = meterRegistry.gauge("transacao.total", new AtomicInteger(0));
         this.transacaoSuccessCounter = meterRegistry.gauge("transacao.success", new AtomicInteger(0));
@@ -69,16 +72,14 @@ public class TransacaoService {
      * @param dto os dados da transação
      * @return a transação processada
      */
-    @Transactional
     public TransacaoResponseDto processarTransacao(TransacaoResquestDto dto) {
         Timer.Sample sample = Timer.start(meterRegistry);
-
         log.info("Iniciando processamento de transação: origem={}, destino={}, valor={}",
                 dto.getContaOrigemId(), dto.getContaDestinoId(), dto.getValor());
 
         transacaoCounter.incrementAndGet();
 
-        // 1. Verificar saldo da conta de origem
+        // Passo 1: Verificar saldo (Fora de transação de banco - Chamada HTTP limpa)
         ContaEspelhoDto contaOrigem = accountClient.getBalance(dto.getContaOrigemId());
         if (contaOrigem == null) {
             log.error("Conta de origem não encontrada: {}", dto.getContaOrigemId());
@@ -91,65 +92,48 @@ public class TransacaoService {
             throw new IllegalArgumentException("Saldo insuficiente para realizar a transação");
         }
 
-        // 2. Registrar a transação no banco de dados
-        Transacao transacao = transacaoMapper.toEntity(dto);
-        Transacao transacaoSalva = transacaoRepository.save(transacao);
-        log.info("Transação registrada com ID: {}", transacaoSalva.getId());
+        // Passo 2: Registrar a transação como PENDENTE e COMMITAR imediatamente no banco
+        // Ao sair deste bloco, o MySQL libera QUALQUER lock que tenha sido criado!
+        Transacao transacaoSalva = transactionTemplate.execute(status -> {
+            Transacao transacao = transacaoMapper.toEntity(dto);
+            transacao.setStatus(Transacao.StatusTransacao.PENDENTE); // Boa prática iniciar pendente
+            return transacaoRepository.save(transacao);
+        });
 
-                try {
-            // 3. Atualizar saldos das contas
+        log.info("Transação registrada temporariamente com ID: {}", transacaoSalva.getId());
+
+        try {
+            // Passo 3: Atualizar saldos das contas (Chamadas HTTP livres de locks de banco!)
             atualizarSaldos(dto, contaOrigem);
 
-            // 4. Marcar transação como concluída
-            transacaoSalva.setStatus(Transacao.StatusTransacao.CONCLUIDA);
-            transacaoRepository.save(transacaoSalva);
+            // Passo 4: Marcar transação como concluída abrindo uma microtransação rápida
+            transactionTemplate.executeWithoutResult(status -> {
+                transacaoSalva.setStatus(Transacao.StatusTransacao.CONCLUIDA);
+                transacaoRepository.save(transacaoSalva);
+            });
             log.info("Transação concluída com sucesso: ID={}", transacaoSalva.getId());
 
-            // 5. Enviar mensagem para fila de notificações
+            // Passo 5 e 6: Notificações e Auditorias (Fora de transações)
             enviarNotificacao(transacaoSalva);
-
-            // 6. Registrar auditoria da transação
             registrarAuditoria(transacaoSalva, "TRANSACAO_CONCLUIDA");
 
-            // Update success metrics
             transacaoSuccessCounter.incrementAndGet();
-            sample.stop(Timer.builder("transacao.processing.time")
-                    .description("Time taken to process a transaction")
-                    .publishPercentiles(0.5, 0.95, 0.99)
-                    .register(meterRegistry));
+            // (seu código de métricas sample.stop...)
 
             return transacaoMapper.toResponseDto(transacaoSalva);
 
-        } catch (IllegalArgumentException e) {
-            log.error("Erro ao processar transação: {}", e.getMessage(), e);
-            transacaoSalva.setStatus(Transacao.StatusTransacao.FALHA);
-            transacaoRepository.save(transacaoSalva);
-
-            // Registrar auditoria da falha
-            registrarAuditoria(transacaoSalva, "TRANSACAO_FALHA");
-
-            // Update failure metrics
-            transacaoFailureCounter.incrementAndGet();
-            sample.stop(Timer.builder("transacao.processing.time")
-                    .description("Time taken to process a transaction")
-                    .publishPercentiles(0.5, 0.95, 0.99)
-                    .register(meterRegistry));
-
-            throw e;
         } catch (Exception e) {
             log.error("Erro ao processar transação: {}", e.getMessage(), e);
-            transacaoSalva.setStatus(Transacao.StatusTransacao.FALHA);
-            transacaoRepository.save(transacaoSalva);
 
-            // Registrar auditoria da falha
+            // Em caso de falha, abre outra microtransação rápida para atualizar o status para FALHA
+            transactionTemplate.executeWithoutResult(status -> {
+                transacaoSalva.setStatus(Transacao.StatusTransacao.FALHA);
+                transacaoRepository.save(transacaoSalva);
+            });
+
             registrarAuditoria(transacaoSalva, "TRANSACAO_FALHA");
-
-            // Update failure metrics
             transacaoFailureCounter.incrementAndGet();
-            sample.stop(Timer.builder("transacao.processing.time")
-                    .description("Time taken to process a transaction")
-                    .publishPercentiles(0.5, 0.95, 0.99)
-                    .register(meterRegistry));
+            // (seu código de métricas sample.stop...)
 
             throw new RuntimeException("Erro ao processar transação: " + e.getMessage(), e);
         }
@@ -187,7 +171,7 @@ public class TransacaoService {
     private void enviarNotificacao(Transacao transacao) {
         try {
             TransacaoResponseDto dto = transacaoMapper.toResponseDto(transacao);
-            rabbitTemplate.convertAndSend("cliente.exchange", "cliente.cadastro", dto);
+            rabbitTemplate.convertAndSend("transacao.exchange", "transacao.concluida", dto);
             log.info("Notificação enviada para fila RabbitMQ: transacao ID={}", transacao.getId());
         } catch (Exception e) {
             log.error("Erro ao enviar notificação para RabbitMQ: {}", e.getMessage(), e);

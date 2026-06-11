@@ -17,6 +17,8 @@ public class RabbitMQConfig {
     public static final String QUEUE_NAME = "cliente.cadastro.queue";
     public static final String ROUTING_KEY = "cliente.cadastro";
 
+    public static final String TRANSACAO_EXCHANGE = "transacao.exchange";
+
     @Bean
     public Queue queue() {
         return new Queue(QUEUE_NAME, true);
@@ -25,6 +27,11 @@ public class RabbitMQConfig {
     @Bean
     public DirectExchange exchange() {
         return new DirectExchange(EXCHANGER_NAME);
+    }
+
+    @Bean
+    public DirectExchange transacaoExchange() {
+        return new DirectExchange(TRANSACAO_EXCHANGE);
     }
 
     @Bean
