@@ -1,16 +1,20 @@
 package com.example.acabou_mony_auth.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.example.acabou_mony_auth.dto.login.LoginRequestDto;
 import com.example.acabou_mony_auth.dto.login.LoginResponseDto;
-import com.example.acabou_mony_auth.dto.verify2fa.Verify2FARequestDTO;
 import com.example.acabou_mony_auth.dto.token.TokenResponseDTO;
+import com.example.acabou_mony_auth.dto.verify2fa.Verify2FARequestDTO;
 import com.example.acabou_mony_auth.mapper.AuthMapper;
 import com.example.acabou_mony_auth.service.AuthService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/")
 public class AuthController {
 
     private final AuthService authService;

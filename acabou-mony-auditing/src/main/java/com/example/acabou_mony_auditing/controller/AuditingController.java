@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/auditing")
+@RequestMapping("/")
 @RequiredArgsConstructor
 @Tag(name = "Auditoria", description = "Endpoints para registro e consulta de logs de auditoria imutáveis")
 public class AuditingController {

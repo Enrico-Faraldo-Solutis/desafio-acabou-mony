@@ -1,0 +1,29 @@
+Index: acabou-mony-notificacao/target/classes/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=acabou-mony-notificacao\r\nserver.port=8087\r\n\r\n# Banco de Dados Único do Ecossistema\r\nspring.datasource.url=jdbc:mysql://localhost:3306/db_acabou_mony?createDatabaseIfNotExist=true&serverTimezone=UTC\r\nspring.datasource.username=${DB_USER:root}\r\nspring.datasource.password=${DB_PASSWORD:senha}\r\nspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver\r\n\r\nspring.jpa.hibernate.ddl-auto=update\r\nspring.jpa.show-sql=true\r\nspring.jpa.properties.hibernate.format_sql=true\r\nspring.jpa.database-platform=org.hibernate.dialect.MySQLDialect\r\n\r\n# Infraestrutura RabbitMQ\r\nspring.rabbitmq.host=localhost\r\nspring.rabbitmq.port=5672\r\nspring.rabbitmq.username=guest\r\nspring.rabbitmq.password=guest\r\n\r\n\r\nsendgrid.api-key=SG.sua_chave_do_sendgrid_aqui\r\nsendgrid.from-email=bilopesortega@gmail.com\r\n\r\nspring.mvc.converters.preferred-json-mapper=jackson
+===================================================================
+diff --git a/acabou-mony-notificacao/target/classes/application.properties b/acabou-mony-notificacao/target/classes/application.properties
+--- a/acabou-mony-notificacao/target/classes/application.properties	(revision 334b0526c35eee5a3abf2b7cca7174a36909ee09)
++++ b/acabou-mony-notificacao/target/classes/application.properties	(date 1781546711716)
+@@ -3,8 +3,8 @@
+ 
+ # Banco de Dados Único do Ecossistema
+ spring.datasource.url=jdbc:mysql://localhost:3306/db_acabou_mony?createDatabaseIfNotExist=true&serverTimezone=UTC
+-spring.datasource.username=${DB_USER:root}
+-spring.datasource.password=${DB_PASSWORD:senha}
++spring.datasource.username=root
++spring.datasource.password=senha_db
+ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+ 
+ spring.jpa.hibernate.ddl-auto=update
+@@ -19,7 +19,7 @@
+ spring.rabbitmq.password=guest
+ 
+ 
+-sendgrid.api-key=SG.sua_chave_do_sendgrid_aqui
++sendgrid.api-key=
+ sendgrid.from-email=bilopesortega@gmail.com
+ 
+ spring.mvc.converters.preferred-json-mapper=jackson
+\ No newline at end of file

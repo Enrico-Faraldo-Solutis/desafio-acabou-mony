@@ -25,7 +25,7 @@ import java.util.List;
  * All exceptions are handled by GlobalExceptionHandler
  */
 @RestController
-@RequestMapping("/api/transactions")
+@RequestMapping("/")
 @Slf4j
 @Validated
 @Tag(name = "Transactions", description = "APIs for managing financial transactions")

@@ -1,34 +1,28 @@
 package com.exemplo.gateway.controller;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
+
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:5173")
 public class GatewayController {
 
     private final WebClient webClient;
-
-    // URLs injetadas do application.properties — sem hardcode de porta
-    @Value("${services.auth.url}")
-    private String authUrl;
-
-    @Value("${services.account.url}")
-    private String accountUrl;
-
-    @Value("${services.card.url}")
-    private String cardUrl;
-
-    @Value("${services.transaction.url}")
-    private String transactionUrl;
-
-    @Value("${services.auditing.url}")
-    private String auditingUrl;
 
     public GatewayController() {
         this.webClient = WebClient.builder().build();
@@ -48,21 +42,16 @@ public class GatewayController {
             @RequestBody(required = false) Mono<String> body,
             ServerHttpRequest request) {
 
-        // Mapeia o segmento da URL para a URL base do microsserviço correspondente
         String baseUrl = switch (service) {
-            case "auth"         -> authUrl;
-            case "accounts"     -> accountUrl;
-            case "cards"        -> cardUrl;
-            case "transactions" -> transactionUrl;
-            case "auditing"     -> auditingUrl;
-            default             -> null;
+            case "acabou-mony-account" -> "http://localhost:8080";
+            case "acabou-mony-auth" -> "http://localhost:8081";
+            case "acabou-mony-transaction" -> "http://localhost:8083";
+            case "acabou-mony-auditing" -> "http://localhost:8084";
+            case "acabou-mony-card" -> "http://localhost:8085";
+            default -> null;
         };
 
-        if (baseUrl == null) {
-            return Mono.just(ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("Serviço não encontrado: " + service));
-        }
+        if (baseUrl == null) return Mono.just(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Serviço não encontrado"));
 
         String fullPath = request.getURI().getRawPath().replace("/api/" + service, "");
 

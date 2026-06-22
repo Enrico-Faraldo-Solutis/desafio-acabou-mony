@@ -4,16 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="/Fix api-gateway">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_06_2026_08_54_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_06_2026_08_54__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_06_2026_09_00_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_06_2026_09_00__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_06_2026_09_16_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05_06_2026_09_16__Changes_.xml" beforeDir="false" />
+    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="/Fix loginjwt2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/security/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/ContaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/ContaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/UsuarioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-auditing/src/main/java/com/example/acabou_mony_auditing/controller/AuditingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auditing/src/main/java/com/example/acabou_mony_auditing/controller/AuditingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-auditing/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auditing/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-auth/src/main/java/com/example/acabou_mony_auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auth/src/main/java/com/example/acabou_mony_auth/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-auth/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auth/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/controller/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/controller/CardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-card/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-card/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/src/main/java/com/exemplo/gateway/controller/GatewayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/src/main/java/com/exemplo/gateway/controller/GatewayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/controller/GatewayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/controller/GatewayController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/controller/TransacaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/controller/TransacaoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/specs.md" beforeDir="false" afterPath="$PROJECT_DIR$/specs.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +45,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="fix/loginjwt" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,12 +57,12 @@
     &quot;assignee&quot;: &quot;gustamuniz7&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Enrico-Faraldo-Solutis/desafio-acabou-mony.git",
-    "accountId": "19e18a06-bc0c-4eab-bc95-5cc2cabacd79"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Enrico-Faraldo-Solutis/desafio-acabou-mony.git&quot;,
+    &quot;accountId&quot;: &quot;19e18a06-bc0c-4eab-bc95-5cc2cabacd79&quot;
   }
-}]]></component>
+}</component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -85,7 +95,7 @@
     "Spring Boot.ApiGatewayApplication.executor": "Run",
     "Spring Boot.NotificacaoServiceApplication.executor": "Run",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "fix/loginjwt",
+    "git-widget-placeholder": "frontend-hideki",
     "kotlin-language-version-configured": "true",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
@@ -114,6 +124,7 @@
               <entry key="AcabouMonyAuthApplication" value="STOPPED" />
               <entry key="AcabouMonyCardApplication" value="STOPPED" />
               <entry key="AcabouMonyTransactionApplication" value="STOPPED" />
+              <entry key="ApiGatewayApplication" value="STOPPED" />
               <entry key="NotificacaoServiceApplication" value="STOPPED" />
             </map>
           </value>
@@ -121,7 +132,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AcabouMonyTransactionApplication">
+  <component name="RunManager" selected="Spring Boot.ApiGatewayApplication">
     <configuration name="AcabouMonyAccountApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <envs>
         <env name="DB_USER" value="root" />
@@ -176,6 +187,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+      <module name="acabou-mony-gateway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.exemplo.gateway.ApiGatewayApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.exemplo.gateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NotificacaoServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <envs>
         <env name="DB_USER" value="root" />
@@ -194,7 +219,13 @@
       <item itemvalue="Spring Boot.AcabouMonyCardApplication" />
       <item itemvalue="Spring Boot.AcabouMonyTransactionApplication" />
       <item itemvalue="Spring Boot.NotificacaoServiceApplication" />
+      <item itemvalue="Spring Boot.ApiGatewayApplication" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.ApiGatewayApplication" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -220,7 +251,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781203230536</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="/Fix loginjwt2">
+      <option name="closed" value="true" />
+      <created>1781547719121</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1781547719121</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -228,7 +267,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="/Fix api-gateway" />
-    <option name="LAST_COMMIT_MESSAGE" value="/Fix api-gateway" />
+    <MESSAGE value="/Fix loginjwt" />
+    <MESSAGE value="/Fix loginjwt2" />
+    <option name="LAST_COMMIT_MESSAGE" value="/Fix loginjwt2" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
