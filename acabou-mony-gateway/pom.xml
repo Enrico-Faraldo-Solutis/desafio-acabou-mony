@@ -20,9 +20,18 @@
     </properties>
 
     <dependencies>
+        <!-- REMOVE WebFlux -->
+        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        -->
+
+        <!-- ADD Spring Web (MVC) -->
+        <dependency>
+                <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
@@ -60,10 +69,13 @@
                 <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
+        <!-- This dependency is redundant and can be removed -->
+        <!--
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
         </dependency>
+        -->
     </dependencies>
     <build>
         <plugins>

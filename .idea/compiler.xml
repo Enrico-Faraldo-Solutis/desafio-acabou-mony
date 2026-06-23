@@ -9,6 +9,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="acabou-mony-gateway" />
       </profile>
+      <profile name="Annotation profile for acabou-mony-auth" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.34/lombok-1.18.34.jar" />
+        </processorPath>
+        <module name="acabou-mony-auth" />
+      </profile>
       <profile name="Annotation profile for desafio-acabou-mony" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -21,7 +30,6 @@
         <module name="acabou-mony-account" />
         <module name="acabou-mony-auditing" />
         <module name="acabou-mony-notificacao" />
-        <module name="acabou-mony-auth" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

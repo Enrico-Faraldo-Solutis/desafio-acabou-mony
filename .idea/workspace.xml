@@ -4,26 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="/Fix loginjwt2">
+    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="implementando frontend">
+      <change afterPath="$PROJECT_DIR$/acabou-mony-auth/src/main/java/com/example/acabou_mony_auth/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/ContaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/ContaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-auditing/src/main/java/com/example/acabou_mony_auditing/controller/AuditingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auditing/src/main/java/com/example/acabou_mony_auditing/controller/AuditingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-auditing/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auditing/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-auth/src/main/java/com/example/acabou_mony_auth/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auth/src/main/java/com/example/acabou_mony_auth/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-auth/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auth/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/controller/CardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/controller/CardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-card/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-card/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-auth/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-auth/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/src/main/java/com/exemplo/gateway/ApiGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/src/main/java/com/exemplo/gateway/ApiGatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/src/main/java/com/exemplo/gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/src/main/java/com/exemplo/gateway/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/src/main/java/com/exemplo/gateway/controller/GatewayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/src/main/java/com/exemplo/gateway/controller/GatewayController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/ApiGatewayApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/ApiGatewayApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/config/GatewayConfig.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/controller/GatewayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-gateway/target/classes/com/exemplo/gateway/controller/GatewayController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-notificacao/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-notificacao/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/controller/TransacaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/controller/TransacaoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/specs.md" beforeDir="false" afterPath="$PROJECT_DIR$/specs.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +73,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Maven.acabou-mony-auth [clean,install].executor": "Run",
+    "Maven.acabou-mony-auth [clean].executor": "Run",
+    "Maven.acabou-mony-auth [install].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -98,10 +96,11 @@
     "git-widget-placeholder": "frontend-hideki",
     "kotlin-language-version-configured": "true",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -259,7 +258,15 @@
       <option name="project" value="LOCAL" />
       <updated>1781547719121</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="implementando frontend">
+      <option name="closed" value="true" />
+      <created>1782152730844</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1782152730844</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +276,8 @@
     <MESSAGE value="/Fix api-gateway" />
     <MESSAGE value="/Fix loginjwt" />
     <MESSAGE value="/Fix loginjwt2" />
-    <option name="LAST_COMMIT_MESSAGE" value="/Fix loginjwt2" />
+    <MESSAGE value="implementando frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementando frontend" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

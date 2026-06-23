@@ -1,68 +1,79 @@
 package com.exemplo.gateway.controller;
 
+import java.net.URI;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import reactor.core.publisher.Mono;
-
+import jakarta.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:5173")
 public class GatewayController {
 
-    private final WebClient webClient;
+    private final RestTemplate restTemplate;
 
     public GatewayController() {
-        this.webClient = WebClient.builder().build();
+        this.restTemplate = new RestTemplate();
     }
 
-    @GetMapping("/teste")
-    public Mono<String> teste() {
-        return Mono.just("Gateway funcionando!");
-    }
-
-    @RequestMapping("/{service}/{path:^(?!api).*$}/**")
-    public Mono<ResponseEntity<String>> proxy(
+    @RequestMapping("/{service}/**")
+    public ResponseEntity<String> proxy(
             @PathVariable String service,
-            @PathVariable String path,
-            @RequestHeader HttpHeaders headers,
-            @RequestParam(required = false) MultiValueMap<String, String> queryParams,
-            @RequestBody(required = false) Mono<String> body,
-            ServerHttpRequest request) {
+            @RequestBody(required = false) String body,
+            HttpMethod method,
+            HttpServletRequest request) {
 
         String baseUrl = switch (service) {
-            case "acabou-mony-account" -> "http://localhost:8080";
-            case "acabou-mony-auth" -> "http://localhost:8081";
+            case "acabou-mony-account"     -> "http://localhost:8080";
+            case "acabou-mony-auth"        -> "http://localhost:8081";
             case "acabou-mony-transaction" -> "http://localhost:8083";
-            case "acabou-mony-auditing" -> "http://localhost:8084";
-            case "acabou-mony-card" -> "http://localhost:8085";
+            case "acabou-mony-auditing"    -> "http://localhost:8084";
+            case "acabou-mony-card"        -> "http://localhost:8085";
             default -> null;
         };
 
-        if (baseUrl == null) return Mono.just(ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Serviço não encontrado"));
+        if (baseUrl == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Serviço não encontrado");
+        }
 
-        String fullPath = request.getURI().getRawPath().replace("/api/" + service, "");
+        // Reconstruct the downstream URL
+        String downstreamPath = request.getRequestURI().replace("/api/" + service, "");
+        URI downstreamUri = UriComponentsBuilder.fromHttpUrl(baseUrl)
+                .path(downstreamPath)
+                .query(request.getQueryString())
+                .build(true)
+                .toUri();
 
-        System.out.println("FULL PATH: " + fullPath);
-        System.out.println("BASE URL: " + baseUrl);
+        // Copy headers
+        HttpHeaders headers = Collections.list(request.getHeaderNames())
+                .stream()
+                .collect(Collectors.toMap(
+                        headerName -> headerName,
+                        headerName -> Collections.list(request.getHeaders(headerName)),
+                        (oldValue, newValue) -> newValue, // In case of duplicates, keep the new one
+                        HttpHeaders::new
+                ));
+        headers.remove(HttpHeaders.HOST); // Let RestTemplate set the host
 
-        return webClient.method(request.getMethod())
-                .uri(baseUrl + fullPath)
-                .headers(httpHeaders -> httpHeaders.addAll(headers))
-                .body(body == null ? Mono.empty() : body, String.class)
-                .retrieve()
-                .toEntity(String.class);
+        HttpEntity<String> httpEntity = new HttpEntity<>(body, headers);
+
+        try {
+            // Execute the request
+            return restTemplate.exchange(downstreamUri, method, httpEntity, String.class);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(e.getMessage());
+        }
     }
 }
+
