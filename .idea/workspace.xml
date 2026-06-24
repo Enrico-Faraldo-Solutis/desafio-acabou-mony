@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="corrigindo CORS">
+    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="frontend login conta e usuario">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/ContaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/ContaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/UsuarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/controller/UsuarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-account/src/main/java/com/example/acabou_mony_account/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/controller/TransacaoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/controller/TransacaoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/DashboardPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/DashboardPage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +263,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782236112990</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="frontend login conta e usuario">
+      <option name="closed" value="true" />
+      <created>1782313051711</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1782313051711</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,7 +283,8 @@
     <MESSAGE value="/Fix loginjwt2" />
     <MESSAGE value="implementando frontend" />
     <MESSAGE value="corrigindo CORS" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrigindo CORS" />
+    <MESSAGE value="frontend login conta e usuario" />
+    <option name="LAST_COMMIT_MESSAGE" value="frontend login conta e usuario" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>

@@ -9,6 +9,11 @@ import CreateUserPage from './pages/CreateUserPage';
 import UserDetailPage from './pages/UserDetailPage';
 import AccountsPage from './pages/AccountsPage';
 import AccountDetailPage from './pages/AccountDetailPage';
+import AuditLogsPage from './pages/AuditLogsPage';
+import AuditLogDetailPage from './pages/AuditLogDetailPage';
+import CardsPage from './pages/CardsPage';
+import TransactionsPage from './pages/TransactionsPage';
+import TransactionDetailPage from './pages/TransactionDetailPage';
 import './App.css';
 
 function App() {
@@ -70,6 +75,52 @@ function App() {
             element={
               <ProtectedRoute>
                 <AccountDetailPage />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Audit Log Routes */}
+          <Route 
+            path="/audit-logs" 
+            element={
+              <ProtectedRoute>
+                <AuditLogsPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/audit-logs/:id" 
+            element={
+              <ProtectedRoute>
+                <AuditLogDetailPage />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Card Management Routes */}
+          <Route 
+            path="/cards" 
+            element={
+              <ProtectedRoute>
+                <CardsPage />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Transaction Management Routes */}
+          <Route 
+            path="/transactions" 
+            element={
+              <ProtectedRoute>
+                <TransactionsPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/transactions/:id" 
+            element={
+              <ProtectedRoute>
+                <TransactionDetailPage />
               </ProtectedRoute>
             } 
           />

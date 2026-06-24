@@ -51,17 +51,30 @@ function DashboardPage() {
           </div>
 
           <div className="dashboard-card">
-            <div className="card-icon">💰</div>
-            <h3>Transações</h3>
-            <p>Visualize seu histórico</p>
-            <button className="btn-card">Em breve</button>
+            <div className="card-icon">🎴</div>
+            <h3>Cartões</h3>
+            <p>Gerencie cartões virtuais</p>
+            <button className="btn-card" onClick={() => navigate('/cards')}>
+              Acessar
+            </button>
           </div>
 
           <div className="dashboard-card">
-            <div className="card-icon">🔔</div>
-            <h3>Notificações</h3>
-            <p>Configurações de alertas</p>
-            <button className="btn-card">Em breve</button>
+            <div className="card-icon">📋</div>
+            <h3>Auditoria</h3>
+            <p>Logs de ações críticas</p>
+            <button className="btn-card" onClick={() => navigate('/audit-logs')}>
+              Acessar
+            </button>
+          </div>
+
+                    <div className="dashboard-card">
+            <div className="card-icon">💰</div>
+            <h3>Transações</h3>
+            <p>Visualize e crie transações</p>
+            <button className="btn-card" onClick={() => navigate('/transactions')}>
+              Acessar
+            </button>
           </div>
         </div>
 

@@ -1,0 +1,268 @@
+.transaction-detail-page {
+  min-height: 100vh;
+  background-color: #f7fafc;
+  padding: 40px 20px;
+}
+
+.transaction-detail-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.detail-header {
+  margin-bottom: 32px;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  color: #667eea;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 16px;
+  padding: 8px 0;
+  transition: color 0.2s;
+}
+
+.btn-back:hover {
+  color: #764ba2;
+}
+
+.detail-header h1 {
+  color: #1a202c;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.detail-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.transaction-header-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 32px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transaction-id-badge {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.transaction-status-large {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-icon {
+  font-size: 32px;
+}
+
+.status-badge-large {
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: white;
+}
+
+.status-badge-large.status-success {
+  color: #22543d;
+}
+
+.status-badge-large.status-pending {
+  color: #7c2d12;
+}
+
+.status-badge-large.status-failed {
+  color: #742a2a;
+}
+
+.status-badge-large.status-cancelled {
+  color: #2d3748;
+}
+
+.status-badge-large.status-default {
+  color: #44337a;
+}
+
+.amount-section {
+  background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+  padding: 40px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.amount-label {
+  color: #718096;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.amount-value {
+  color: #1a202c;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.card-section {
+  padding: 32px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.card-section:last-child {
+  border-bottom: none;
+}
+
+.card-section h2 {
+  color: #2d3748;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.transaction-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px;
+  background: #f7fafc;
+  border-radius: 8px;
+}
+
+.flow-account {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+}
+
+.flow-label {
+  color: #718096;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.flow-value {
+  color: #1a202c;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.flow-arrow {
+  font-size: 32px;
+  color: #667eea;
+  font-weight: 700;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-label {
+  color: #718096;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  color: #1a202c;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.description-box {
+  background: #f7fafc;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  color: #2d3748;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #667eea;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.error-message {
+  background-color: #fed7d7;
+  color: #c53030;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border-left: 4px solid #c53030;
+}
+
+.btn-secondary {
+  background: white;
+  color: #4a5568;
+  padding: 12px 24px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  border-color: #cbd5e0;
+  background-color: #f7fafc;
+}
+
+@media (max-width: 768px) {
+  .transaction-header-section {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .amount-value {
+    font-size: 36px;
+  }
+
+  .transaction-flow {
+    flex-direction: column;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
