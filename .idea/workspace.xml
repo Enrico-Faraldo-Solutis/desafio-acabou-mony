@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="frontend login conta e usuario">
+    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="frontend finalizado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/DashboardPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/DashboardPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/AUTH_FLOW.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/FILES_CREATED.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/IMPLEMENTATION_SUMMARY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/QUICK_START.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/USER_FLOW_VISUAL.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,80 +124,62 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.ApiGatewayApplication">
-    <configuration name="AcabouMonyAccountApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <envs>
-        <env name="DB_USER" value="root" />
-        <env name="DB_PASSWORD" value="solutis" />
-      </envs>
+  <component name="RunManager" selected="Spring Boot.AcabouMonyTransactionApplication">
+    <configuration name="AcabouMonyAccountApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="acabou-mony-account" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_account.AcabouMonyAccountApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AcabouMonyAuditingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <envs>
-        <env name="DB_USER" value="root" />
-        <env name="DB_PASSWORD" value="solutis" />
-      </envs>
+    <configuration name="AcabouMonyAuditingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="acabou-mony-auditing" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_auditing.AcabouMonyAuditingApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AcabouMonyAuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <configuration name="AcabouMonyAuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="acabou-mony-auth" />
-      <selectedOptions>
-        <option name="environmentVariables" />
-      </selectedOptions>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_auth.AcabouMonyAuthApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AcabouMonyCardApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <envs>
-        <env name="DB_USER" value="root" />
-        <env name="DB_PASSWORD" value="solutis" />
-      </envs>
+    <configuration name="AcabouMonyCardApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="acabou-mony-card" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_card.AcabouMonyCardApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AcabouMonyTransactionApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <envs>
-        <env name="DB_USER" value="root" />
-        <env name="DB_PASSWORD" value="solutis" />
-      </envs>
+    <configuration name="AcabouMonyTransactionApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="acabou-mony-transaction" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.acabou_mony_transaction.AcabouMonyTransactionApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+    <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="acabou-mony-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.exemplo.gateway.ApiGatewayApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.exemplo.gateway.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NotificacaoServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-      <envs>
-        <env name="DB_USER" value="root" />
-        <env name="DB_PASSWORD" value="solutis" />
-      </envs>
+    <configuration name="NotificacaoServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="acabou-mony-notificacao" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.notificacao_service.NotificacaoServiceApplication" />
       <method v="2">
@@ -201,19 +187,14 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Spring Boot.AcabouMonyAccountApplication" />
-      <item itemvalue="Spring Boot.AcabouMonyAuditingApplication" />
-      <item itemvalue="Spring Boot.AcabouMonyAuthApplication" />
-      <item itemvalue="Spring Boot.AcabouMonyCardApplication" />
       <item itemvalue="Spring Boot.AcabouMonyTransactionApplication" />
       <item itemvalue="Spring Boot.NotificacaoServiceApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyCardApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyAuditingApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyAuthApplication" />
+      <item itemvalue="Spring Boot.AcabouMonyAccountApplication" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Spring Boot.ApiGatewayApplication" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -271,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782313051711</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="frontend finalizado">
+      <option name="closed" value="true" />
+      <created>1782320621525</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1782320621525</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,7 +273,8 @@
     <MESSAGE value="implementando frontend" />
     <MESSAGE value="corrigindo CORS" />
     <MESSAGE value="frontend login conta e usuario" />
-    <option name="LAST_COMMIT_MESSAGE" value="frontend login conta e usuario" />
+    <MESSAGE value="frontend finalizado" />
+    <option name="LAST_COMMIT_MESSAGE" value="frontend finalizado" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
