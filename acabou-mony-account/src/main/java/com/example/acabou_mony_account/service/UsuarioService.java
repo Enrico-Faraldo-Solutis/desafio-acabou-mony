@@ -36,6 +36,13 @@ public class UsuarioService {
     @Transactional
     public UsuarioResponseDto criarUsuario(UsuarioRequestDto request) {
 
+        if (usuarioRepository.existsByCpf(request.getCpf())) {
+            throw new ConflitoDeDadosException("CPF já cadastrado: " + request.getCpf());
+        }
+        if (usuarioRepository.existsByEmail(request.getEmail())) {
+            throw new ConflitoDeDadosException("E-mail já cadastrado: " + request.getEmail());
+        }
+
         Usuario usuario = usuarioMapper.toEntity(request);
         String senhaCriptografada = passwordEncoder.encode(request.getSenha());
         usuario.setSenhaHash(senhaCriptografada);

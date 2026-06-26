@@ -146,6 +146,12 @@ public class TransacaoService {
      * @param contaOrigem os dados da conta de origem
      */
     private void atualizarSaldos(TransacaoResquestDto dto, ContaEspelhoDto contaOrigem) {
+        // Primeiro verificar se a conta de destino existe (antes de debitar)
+        ContaEspelhoDto contaDestino = accountClient.getBalance(dto.getContaDestinoId());
+        if (contaDestino == null) {
+            throw new IllegalArgumentException("Conta de destino não encontrada");
+        }
+
         // Debitar da conta de origem
         BigDecimal novoSaldoOrigem = contaOrigem.getSaldo().subtract(dto.getValor());
         contaOrigem.setSaldo(novoSaldoOrigem);
@@ -153,10 +159,6 @@ public class TransacaoService {
         log.info("Saldo debitado da conta {}: novo saldo={}", dto.getContaOrigemId(), novoSaldoOrigem);
 
         // Creditar na conta de destino
-        ContaEspelhoDto contaDestino = accountClient.getBalance(dto.getContaDestinoId());
-        if (contaDestino == null) {
-            throw new IllegalArgumentException("Conta de destino não encontrada");
-        }
         BigDecimal novoSaldoDestino = contaDestino.getSaldo().add(dto.getValor());
         contaDestino.setSaldo(novoSaldoDestino);
         accountClient.updateBalance(dto.getContaDestinoId(), contaDestino);

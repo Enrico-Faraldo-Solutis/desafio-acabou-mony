@@ -95,7 +95,28 @@ services:
       DB_USER: ${DB_USER:-root}
       DB_PASS: ${DB_PASS:-102102} # 🌟 CORRIGIDO: Alinhado com a senha do MySQL
     ports:
-      - "8082:8082"
+      - "8082:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - acabou-mony-net
+
+  # ---------------------------------------------------------------
+  # Card Service [DEV 1]
+  # ---------------------------------------------------------------
+  acabou-mony-card:
+    build:
+      context: ./acabou-mony-card
+      dockerfile: Dockerfile
+    container_name: acabou-mony-card
+    restart: unless-stopped
+    environment:
+      DB_HOST: mysql
+      DB_USER: ${DB_USER:-root}
+      DB_PASS: ${DB_PASS:-102102}
+    ports:
+      - "8086:8085"
     depends_on:
       mysql:
         condition: service_healthy
@@ -117,7 +138,7 @@ services:
       DB_PASS: ${DB_PASS:-102102} # 🌟 CORRIGIDO: Alinhado com a senha do MySQL
       RABBITMQ_HOST: rabbitmq
     ports:
-      - "8084:8084"
+      - "8084:8083"
     depends_on:
       mysql:
         condition: service_healthy
@@ -140,7 +161,7 @@ services:
       DB_USER: ${DB_USER:-root}
       DB_PASS: ${DB_PASS:-102102} # 🌟 CORRIGIDO: Alinhado com a senha do MySQL
     ports:
-      - "8085:8085"
+      - "8085:8084"
     depends_on:
       mysql:
         condition: service_healthy
@@ -187,7 +208,7 @@ services:
       TRANSACTION_HOST: acabou-mony-transaction
       AUDITING_HOST: acabou-mony-auditing
     ports:
-      - "8083:8080" # 🌟 CORRIGIDO: Mudou de 8080 para 8083 para liberar o conflito no seu Windows
+      - "8083:8088" # Gateway internamente roda na 8088
     depends_on:
       acabou-mony-auth:
         condition: service_healthy

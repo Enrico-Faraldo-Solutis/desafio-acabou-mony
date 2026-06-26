@@ -27,6 +27,8 @@ public class AuthWebFilter implements WebFilter {
     private static final List<String> ROTAS_PUBLICAS = List.of(
             "/api/auth/login",
             "/api/auth/verify-2fa",
+            "/api/auth/register",
+            "/api/accounts/users",
             "/api/teste",
             "/actuator/health"
     );

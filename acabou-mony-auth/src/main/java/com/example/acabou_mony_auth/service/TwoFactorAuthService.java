@@ -46,7 +46,7 @@ public class TwoFactorAuthService {
 
         codigo2FARepository.save(codigo2FA);
 
-        // 🌟 2. A MÁGICA DO ENVIO AUTOMÁTICO ACONTECE AQUI:
+
         try {
             Map<String, Object> dados2FA = new HashMap<>();
             dados2FA.put("email", email);

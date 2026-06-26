@@ -60,6 +60,8 @@ public class Transacao {
     public enum TipoTransacao {
         DEBITO,
         CREDITO,
-        TRANSFERENCIA
+        TRANSFERENCIA,
+        PAGAMENTO,
+        RECARGA
     }
 }

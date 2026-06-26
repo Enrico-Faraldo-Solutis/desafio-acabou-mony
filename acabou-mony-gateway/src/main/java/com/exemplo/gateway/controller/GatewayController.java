@@ -1,12 +1,16 @@
 package com.exemplo.gateway.controller;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.*;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -14,7 +18,6 @@ public class GatewayController {
 
     private final WebClient webClient;
 
-    // URLs injetadas do application.properties — sem hardcode de porta
     @Value("${services.auth.url}")
     private String authUrl;
 
@@ -44,11 +47,32 @@ public class GatewayController {
             @PathVariable String service,
             @PathVariable String path,
             @RequestHeader HttpHeaders headers,
-            @RequestParam(required = false) MultiValueMap<String, String> queryParams,
-            @RequestBody(required = false) Mono<String> body,
             ServerHttpRequest request) {
 
-        // Mapeia o segmento da URL para a URL base do microsserviço correspondente
+        return doProxy(service, headers, request);
+    }
+
+    @RequestMapping("/{service}")
+    public Mono<ResponseEntity<String>> proxyRoot(
+            @PathVariable String service,
+            @RequestHeader HttpHeaders headers,
+            ServerHttpRequest request) {
+
+        return doProxy(service, headers, request);
+    }
+
+    private static final Set<String> HEADERS_PARA_REMOVER = Set.of(
+            HttpHeaders.HOST,
+            HttpHeaders.CONTENT_LENGTH,
+            HttpHeaders.CONTENT_ENCODING,
+            HttpHeaders.TRANSFER_ENCODING
+    );
+
+    private Mono<ResponseEntity<String>> doProxy(
+            String service,
+            HttpHeaders headers,
+            ServerHttpRequest request) {
+
         String baseUrl = switch (service) {
             case "auth"         -> authUrl;
             case "accounts"     -> accountUrl;
@@ -64,16 +88,28 @@ public class GatewayController {
                     .body("Serviço não encontrado: " + service));
         }
 
-        String fullPath = request.getURI().getRawPath().replace("/api/" + service, "");
-
-        System.out.println("FULL PATH: " + fullPath);
-        System.out.println("BASE URL: " + baseUrl);
+        String fullPath = request.getURI().getRawPath();
+        Flux<DataBuffer> requestBody = request.getBody();
 
         return webClient.method(request.getMethod())
                 .uri(baseUrl + fullPath)
-                .headers(httpHeaders -> httpHeaders.addAll(headers))
-                .body(body == null ? Mono.empty() : body, String.class)
+                .headers(httpHeaders -> {
+                    headers.forEach((key, values) -> {
+                        if (!HEADERS_PARA_REMOVER.contains(key)) {
+                            values.forEach(v -> httpHeaders.add(key, v));
+                        }
+                    });
+                })
+                .body(requestBody, DataBuffer.class)
                 .retrieve()
-                .toEntity(String.class);
+                .toEntity(String.class)
+                .onErrorResume(WebClientResponseException.class, ex ->
+                    Mono.just(ResponseEntity
+                            .status(ex.getStatusCode())
+                            .body(ex.getResponseBodyAsString())))
+                .onErrorResume(ex ->
+                    Mono.just(ResponseEntity
+                            .status(HttpStatus.BAD_GATEWAY)
+                            .body("Erro no gateway: " + ex.getMessage())));
     }
 }

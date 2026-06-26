@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 // O parâmetro 'url' aponta para onde o microsserviço de contas está rodando.
-@FeignClient(name = "accountClient", url = "http://localhost:8080/api/accounts")
+@FeignClient(name = "accountClient", url = "http://acabou-mony-account:8080/api/accounts")
 public interface AccountClient {
 
     // Faz um GET real para o outro microsserviço
