@@ -39,16 +39,26 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(body, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-    @ExceptionHandler(RuntimeException.class)
+        // Captura qualquer outro erro do Feign (conexão recusada, timeout, etc)
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<Object> handleFeignException(FeignException ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_GATEWAY.value());
+        body.put("error", "Bad Gateway");
+        body.put("message", "Erro ao comunicar com o serviço de contas: " + ex.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_GATEWAY);
+    }
+
+        @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<Object> handleRuntimeException(RuntimeException ex) {
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "Not Found");
-
-        // Captura exatamente a mensagem que você escreveu no "throw new RuntimeException"
+        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+        body.put("error", "Internal Server Error");
         body.put("message", ex.getMessage());
 
-        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

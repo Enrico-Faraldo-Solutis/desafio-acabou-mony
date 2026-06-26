@@ -145,22 +145,15 @@ public class TransacaoService {
      * @param dto os dados da transação
      * @param contaOrigem os dados da conta de origem
      */
-    private void atualizarSaldos(TransacaoResquestDto dto, ContaEspelhoDto contaOrigem) {
-        // Debitar da conta de origem
-        BigDecimal novoSaldoOrigem = contaOrigem.getSaldo().subtract(dto.getValor());
-        contaOrigem.setSaldo(novoSaldoOrigem);
-        accountClient.updateBalance(dto.getContaOrigemId(), contaOrigem);
-        log.info("Saldo debitado da conta {}: novo saldo={}", dto.getContaOrigemId(), novoSaldoOrigem);
+        private void atualizarSaldos(TransacaoResquestDto dto, ContaEspelhoDto contaOrigem) {
+        // Debitar da conta de origem (valor negativo)
+        BigDecimal valorDebito = dto.getValor().negate();
+        accountClient.updateBalance(dto.getContaOrigemId(), valorDebito);
+        log.info("Saldo debitado da conta {}: valor={}", dto.getContaOrigemId(), valorDebito);
 
-        // Creditar na conta de destino
-        ContaEspelhoDto contaDestino = accountClient.getBalance(dto.getContaDestinoId());
-        if (contaDestino == null) {
-            throw new IllegalArgumentException("Conta de destino não encontrada");
-        }
-        BigDecimal novoSaldoDestino = contaDestino.getSaldo().add(dto.getValor());
-        contaDestino.setSaldo(novoSaldoDestino);
-        accountClient.updateBalance(dto.getContaDestinoId(), contaDestino);
-        log.info("Saldo creditado na conta {}: novo saldo={}", dto.getContaDestinoId(), novoSaldoDestino);
+        // Creditar na conta de destino (valor positivo)
+        accountClient.updateBalance(dto.getContaDestinoId(), dto.getValor());
+        log.info("Saldo creditado na conta {}: valor={}", dto.getContaDestinoId(), dto.getValor());
     }
 
     /**
@@ -185,17 +178,25 @@ public class TransacaoService {
      * @param transacao a transação processada
      * @param operacao a operação realizada
      */
-    private void registrarAuditoria(Transacao transacao, String operacao) {
+        private void registrarAuditoria(Transacao transacao, String operacao) {
         try {
-            AuditLogDto auditLog = AuditLogDto.builder()
-                    .transacaoId(transacao.getId())
-                    .contaOrigemId(transacao.getContaOrigemId())
-                    .contaDestinoId(transacao.getContaDestinoId())
-                    .valor(transacao.getValor())
-                    .status(transacao.getStatus().toString())
-                    .timestamp(LocalDateTime.now())
-                    .operacao(operacao)
-                    .descricao("Transação de " + transacao.getTipo() + " no valor de " + transacao.getValor())
+            // Cria um mapa com os detalhes da transação
+            java.util.Map<String, Object> detalhes = new java.util.HashMap<>();
+            detalhes.put("transacaoId", transacao.getId());
+            detalhes.put("contaOrigemId", transacao.getContaOrigemId());
+            detalhes.put("contaDestinoId", transacao.getContaDestinoId());
+            detalhes.put("valor", transacao.getValor());
+            detalhes.put("status", transacao.getStatus().toString());
+            detalhes.put("tipo", transacao.getTipo().toString());
+            detalhes.put("dataTransacao", transacao.getDataTransacao().toString());
+
+                        AuditLogDto auditLog = AuditLogDto.builder()
+                    .usuarioId(transacao.getUsuarioId()) // Get from transaction
+                    .acao(operacao)
+                    .entidadeNome("TRANSACAO")
+                    .entidadeId(transacao.getId())
+                    .detalhes(detalhes)
+                    .ipOrigem(null) // Pode ser adicionado se necessário
                     .build();
 
             auditingClient.logTransaction(auditLog);

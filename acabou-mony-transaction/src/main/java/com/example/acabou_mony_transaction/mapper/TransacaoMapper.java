@@ -19,12 +19,13 @@ public class TransacaoMapper {
             return null;
         }
 
-        return Transacao.builder()
+                return Transacao.builder()
                 .contaOrigemId(dto.getContaOrigemId())
                 .contaDestinoId(dto.getContaDestinoId())
                 .valor(dto.getValor())
                 .tipo(Transacao.TipoTransacao.valueOf(dto.getTipo().toUpperCase()))
                 .status(Transacao.StatusTransacao.PENDENTE)
+                .usuarioId(dto.getUsuarioId())
                 .build();
     }
 
@@ -39,7 +40,7 @@ public class TransacaoMapper {
             return null;
         }
 
-        return TransacaoResponseDto.builder()
+                return TransacaoResponseDto.builder()
                 .id(entity.getId())
                 .contaOrigemId(entity.getContaOrigemId())
                 .contaDestinoId(entity.getContaDestinoId())
@@ -47,6 +48,7 @@ public class TransacaoMapper {
                 .status(entity.getStatus().name())
                 .tipo(entity.getTipo().name())
                 .dataTransacao(entity.getDataTransacao())
+                .usuarioId(entity.getUsuarioId())
                 .build();
     }
 }

@@ -32,8 +32,11 @@ public class TransacaoResquestDto {
     @Schema(description = "Transaction amount", example = "100.50", required = true)
     private BigDecimal valor;
 
-    @NotNull(message = "Tipo de transação é obrigatório")
+        @NotNull(message = "Tipo de transação é obrigatório")
     @Schema(description = "Transaction type (DEBITO, CREDITO, TRANSFERENCIA)", example = "TRANSFERENCIA", required = true)
     private String tipo;
+
+    @Schema(description = "User ID who initiated the transaction", example = "1")
+    private Long usuarioId;
 }
 

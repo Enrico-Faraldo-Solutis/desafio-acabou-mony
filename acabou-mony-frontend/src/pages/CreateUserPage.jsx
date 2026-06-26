@@ -9,7 +9,6 @@ function CreateUserPage() {
     email: '',
     senha: '',
     cpf: '',
-    telefone: '',
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -89,34 +88,19 @@ function CreateUserPage() {
             </div>
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="cpf">CPF *</label>
-              <input
-                type="text"
-                id="cpf"
-                name="cpf"
-                value={formData.cpf}
-                onChange={handleChange}
-                placeholder="000.000.000-00"
-                maxLength="14"
-                required
-                disabled={loading}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="telefone">Telefone</label>
-              <input
-                type="tel"
-                id="telefone"
-                name="telefone"
-                value={formData.telefone}
-                onChange={handleChange}
-                placeholder="(11) 98765-4321"
-                disabled={loading}
-              />
-            </div>
+          <div className="form-group">
+            <label htmlFor="cpf">CPF *</label>
+            <input
+              type="text"
+              id="cpf"
+              name="cpf"
+              value={formData.cpf}
+              onChange={handleChange}
+              placeholder="000.000.000-00"
+              maxLength="14"
+              required
+              disabled={loading}
+            />
           </div>
 
           <div className="form-group">

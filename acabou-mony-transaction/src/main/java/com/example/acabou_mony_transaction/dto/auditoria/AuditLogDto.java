@@ -1,17 +1,16 @@
 package com.example.acabou_mony_transaction.dto.auditoria;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * DTO for audit log entries
  * Sent to auditing service for critical transaction operations
+ * Matches the AuditLogCreateDTO structure expected by the auditing service
  */
 @Data
 @NoArgsConstructor
@@ -19,20 +18,15 @@ import java.time.LocalDateTime;
 @Builder
 public class AuditLogDto {
 
-    private Long transacaoId;
+    private Long usuarioId;
 
-    private Long contaOrigemId;
+    private String acao;
 
-    private Long contaDestinoId;
+    private String entidadeNome;
 
-    private BigDecimal valor;
+    private Long entidadeId;
 
-    private String status;
+    private Map<String, Object> detalhes;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime timestamp;
-
-    private String operacao;
-
-    private String descricao;
+    private String ipOrigem;
 }

@@ -24,14 +24,16 @@ function UserDetailPage() {
       const userData = await userService.getUserById(id);
       setUser(userData);
       
-      // Try to load account if user has one
-      if (userData.contaId) {
-        try {
-          const accountData = await accountService.getAccountBalance(userData.contaId);
-          setAccount(accountData);
-        } catch (err) {
-          console.log('No account found for user');
+      // Try to find account by searching all accounts and matching usuarioId
+      try {
+        const accountsResponse = await accountService.listAllAccounts(0, 100);
+        const userAccount = accountsResponse.content?.find(acc => acc.usuarioId === parseInt(id));
+        
+        if (userAccount) {
+          setAccount(userAccount);
         }
+      } catch (err) {
+        console.log('No account found for user');
       }
     } catch (err) {
       console.error('Error loading user:', err);
@@ -99,10 +101,6 @@ function UserDetailPage() {
               <div className="info-item">
                 <span className="info-label">CPF</span>
                 <span className="info-value">{user.cpf}</span>
-              </div>
-              <div className="info-item">
-                <span className="info-label">Telefone</span>
-                <span className="info-value">{user.telefone || 'Não informado'}</span>
               </div>
             </div>
           </div>

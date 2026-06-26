@@ -13,7 +13,7 @@ function CardsPage() {
   const [showGenerateModal, setShowGenerateModal] = useState(false);
   const [generateForm, setGenerateForm] = useState({
     contaId: '',
-    tipoCartao: 'DEBITO'
+    nomeImpresso: ''
   });
   const [generating, setGenerating] = useState(false);
   
@@ -62,9 +62,12 @@ function CardsPage() {
     setError('');
 
     try {
-      await cardService.generateCard(generateForm);
+      await cardService.generateCard({
+        contaId: parseInt(generateForm.contaId),
+        nomeImpresso: generateForm.nomeImpresso
+      });
       setShowGenerateModal(false);
-      setGenerateForm({ contaId: '', tipoCartao: 'DEBITO' });
+      setGenerateForm({ contaId: '', nomeImpresso: '' });
       
       // Reload cards for the selected account
       if (selectedAccount) {
@@ -105,17 +108,12 @@ function CardsPage() {
     return `${month}/${year}`;
   };
 
-  const getCardTypeLabel = (type) => {
-    const types = {
-      'DEBITO': 'Débito',
-      'CREDITO': 'Crédito',
-      'VIRTUAL': 'Virtual'
-    };
-    return types[type] || type;
+  const getStatusBadgeClass = (ativo) => {
+    return ativo ? 'status-active' : 'status-blocked';
   };
 
-  const getStatusBadgeClass = (status) => {
-    return status === 'ATIVO' ? 'status-active' : 'status-blocked';
+  const getStatusLabel = (ativo) => {
+    return ativo ? 'ATIVO' : 'BLOQUEADO';
   };
 
   return (
@@ -165,21 +163,18 @@ function CardsPage() {
           ) : (
             cards.map((card) => (
               <div key={card.id} className="card-item">
-                <div className={`card-visual ${card.status === 'ATIVO' ? 'card-active' : 'card-blocked'}`}>
+                <div className={`card-visual ${card.ativo ? 'card-active' : 'card-blocked'}`}>
                   <div className="card-chip">💎</div>
                   <div className="card-number">{maskCardNumber(card.numeroCartao)}</div>
                   <div className="card-info">
                     <div className="card-holder">
                       <span className="label">Titular</span>
-                      <span className="value">Conta #{card.contaId}</span>
+                      <span className="value">{card.nomeImpresso}</span>
                     </div>
                     <div className="card-expiry">
                       <span className="label">Validade</span>
                       <span className="value">{formatExpiryDate(card.dataValidade)}</span>
                     </div>
-                  </div>
-                  <div className="card-type-badge">
-                    {getCardTypeLabel(card.tipoCartao)}
                   </div>
                 </div>
                 
@@ -194,17 +189,17 @@ function CardsPage() {
                   </div>
                   <div className="detail-row">
                     <span className="detail-label">Status:</span>
-                    <span className={`status-badge ${getStatusBadgeClass(card.status)}`}>
-                      {card.status}
+                    <span className={`status-badge ${getStatusBadgeClass(card.ativo)}`}>
+                      {getStatusLabel(card.ativo)}
                     </span>
                   </div>
                 </div>
 
                 <button
                   onClick={() => handleToggleStatus(card.id)}
-                  className={`btn-toggle ${card.status === 'ATIVO' ? 'btn-block' : 'btn-unblock'}`}
+                  className={`btn-toggle ${card.ativo ? 'btn-block' : 'btn-unblock'}`}
                 >
-                  {card.status === 'ATIVO' ? '🔒 Bloquear' : '🔓 Desbloquear'}
+                  {card.ativo ? '🔒 Bloquear' : '🔓 Desbloquear'}
                 </button>
               </div>
             ))
@@ -246,17 +241,18 @@ function CardsPage() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="tipoCartao">Tipo de Cartão</label>
-                <select
-                  id="tipoCartao"
-                  value={generateForm.tipoCartao}
-                  onChange={(e) => setGenerateForm({ ...generateForm, tipoCartao: e.target.value })}
+                <label htmlFor="nomeImpresso">Nome Impresso no Cartão *</label>
+                <input
+                  type="text"
+                  id="nomeImpresso"
+                  value={generateForm.nomeImpresso}
+                  onChange={(e) => setGenerateForm({ ...generateForm, nomeImpresso: e.target.value })}
+                  placeholder="NOME COMPLETO"
+                  maxLength="26"
+                  required
                   disabled={generating}
-                >
-                  <option value="DEBITO">Débito</option>
-                  <option value="CREDITO">Crédito</option>
-                  <option value="VIRTUAL">Virtual</option>
-                </select>
+                  style={{ textTransform: 'uppercase' }}
+                />
               </div>
 
               <div className="modal-actions">

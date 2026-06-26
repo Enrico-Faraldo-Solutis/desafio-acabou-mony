@@ -25,12 +25,17 @@ public class CardService {
     private final AccountClient accountClient;
     private final Random random = new Random();
 
-    @Transactional
+        @Transactional
     public CardResponseDTO gerarCartao(CardGenerationRequestDTO request) {
 
-        // Deixe apenas a chamada direta. Se a conta não existir,
-        // o Feign vai lançar o NotFound e o seu Handler vai capturar!
-        accountClient.verificarContaExistente(request.getContaId());
+        try {
+            // Verifica se a conta existe chamando o serviço de contas
+            accountClient.verificarContaExistente(request.getContaId());
+        } catch (FeignException.NotFound e) {
+            throw new RuntimeException("Conta não encontrada com ID: " + request.getContaId());
+        } catch (FeignException e) {
+            throw new RuntimeException("Erro ao verificar conta: Serviço de contas indisponível");
+        }
 
         Cartao cartao = cartaoMapper.toEntity(request);
 

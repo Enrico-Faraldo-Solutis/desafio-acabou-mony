@@ -105,9 +105,9 @@ function AuditLogsPage() {
 
   const getActionBadgeClass = (action) => {
     const actionLower = action?.toLowerCase() || '';
-    if (actionLower.includes('create') || actionLower.includes('criar')) return 'badge-success';
+    if (actionLower.includes('create') || actionLower.includes('criar') || actionLower.includes('concluida')) return 'badge-success';
     if (actionLower.includes('update') || actionLower.includes('atualizar')) return 'badge-info';
-    if (actionLower.includes('delete') || actionLower.includes('deletar')) return 'badge-danger';
+    if (actionLower.includes('delete') || actionLower.includes('deletar') || actionLower.includes('falha')) return 'badge-danger';
     if (actionLower.includes('login')) return 'badge-primary';
     return 'badge-default';
   };
@@ -163,13 +163,25 @@ function AuditLogsPage() {
         {filterType === 'action' && (
           <div className="filter-group">
             <label>Ação:</label>
-            <input
-              type="text"
+            <select
               value={filterValue}
               onChange={(e) => setFilterValue(e.target.value)}
-              placeholder="Ex: LOGIN, CREATE_USER"
-              className="filter-input"
-            />
+              className="filter-select"
+            >
+              <option value="">Selecione uma ação</option>
+              <option value="TRANSACAO_CONCLUIDA">Transação Concluída</option>
+              <option value="TRANSACAO_FALHA">Transação Falha</option>
+              <option value="LOGIN">Login</option>
+              <option value="LOGOUT">Logout</option>
+              <option value="CREATE_USER">Criar Usuário</option>
+              <option value="UPDATE_USER">Atualizar Usuário</option>
+              <option value="DELETE_USER">Deletar Usuário</option>
+              <option value="CREATE_ACCOUNT">Criar Conta</option>
+              <option value="UPDATE_ACCOUNT">Atualizar Conta</option>
+              <option value="GENERATE_CARD">Gerar Cartão</option>
+              <option value="BLOCK_CARD">Bloquear Cartão</option>
+              <option value="UNBLOCK_CARD">Desbloquear Cartão</option>
+            </select>
           </div>
         )}
 
@@ -177,13 +189,17 @@ function AuditLogsPage() {
           <>
             <div className="filter-group">
               <label>Nome da Entidade:</label>
-              <input
-                type="text"
+              <select
                 value={entityName}
                 onChange={(e) => setEntityName(e.target.value)}
-                placeholder="Ex: Usuario, Conta"
-                className="filter-input"
-              />
+                className="filter-select"
+              >
+                <option value="">Selecione uma entidade</option>
+                <option value="TRANSACAO">Transação</option>
+                <option value="USUARIO">Usuário</option>
+                <option value="CONTA">Conta</option>
+                <option value="CARTAO">Cartão</option>
+              </select>
             </div>
             <div className="filter-group">
               <label>ID da Entidade:</label>
@@ -259,7 +275,7 @@ function AuditLogsPage() {
                     }
                   </td>
                   <td className="details-cell">
-                    {log.detalhes ? log.detalhes.substring(0, 50) + '...' : '-'}
+                    {log.detalhes ? JSON.stringify(log.detalhes).substring(0, 50) + '...' : '-'}
                   </td>
                   <td>
                     <button

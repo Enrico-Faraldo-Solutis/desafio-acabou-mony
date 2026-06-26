@@ -21,11 +21,14 @@ public class Transacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "conta_origem_id", nullable = false)
+        @Column(name = "conta_origem_id", nullable = false)
     private Long contaOrigemId;
 
     @Column(name = "conta_destino_id", nullable = false)
     private Long contaDestinoId;
+
+    @Column(name = "usuario_id")
+    private Long usuarioId;
 
     @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal valor;

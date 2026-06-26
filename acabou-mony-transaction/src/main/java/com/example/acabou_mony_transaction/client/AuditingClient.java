@@ -31,18 +31,19 @@ public class AuditingClient {
      *
      * @param auditLog the audit log entry to record
      */
-    public void logTransaction(AuditLogDto auditLog) {
+            public void logTransaction(AuditLogDto auditLog) {
         try {
-            String url = auditingServiceUrl + "/api/auditing";
-            log.info("Sending audit log to auditing service: transacaoId={}, status={}", 
-                    auditLog.getTransacaoId(), auditLog.getStatus());
+            String url = auditingServiceUrl + "/";
+            log.info("Sending audit log to auditing service: acao={}, entidade={}, entidadeId={}", 
+                    auditLog.getAcao(), auditLog.getEntidadeNome(), auditLog.getEntidadeId());
             
             restTemplate.postForObject(url, auditLog, Void.class);
             
-            log.info("Audit log sent successfully: transacaoId={}", auditLog.getTransacaoId());
+            log.info("Audit log sent successfully: entidade={}, entidadeId={}", 
+                    auditLog.getEntidadeNome(), auditLog.getEntidadeId());
         } catch (RestClientException e) {
-            log.error("Failed to send audit log to auditing service: {}. Error: {}", 
-                    auditLog.getTransacaoId(), e.getMessage());
+            log.error("Failed to send audit log to auditing service: entidade={}, entidadeId={}. Error: {}", 
+                    auditLog.getEntidadeNome(), auditLog.getEntidadeId(), e.getMessage());
             // Do NOT rethrow - auditing failures should not block transaction processing
         } catch (Exception e) {
             log.error("Unexpected error while sending audit log: {}", e.getMessage(), e);

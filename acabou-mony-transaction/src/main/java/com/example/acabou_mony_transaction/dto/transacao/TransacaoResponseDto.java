@@ -37,8 +37,11 @@ public class TransacaoResponseDto {
     @Schema(description = "Transaction type (DEBITO, CREDITO, TRANSFERENCIA)", example = "TRANSFERENCIA")
     private String tipo;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+        @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Schema(description = "Transaction timestamp", example = "2024-01-15T10:30:00")
     private LocalDateTime dataTransacao;
+
+    @Schema(description = "User ID who initiated the transaction", example = "1")
+    private Long usuarioId;
 }
 

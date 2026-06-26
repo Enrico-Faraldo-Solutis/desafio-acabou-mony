@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 // O parâmetro 'url' aponta para onde o microsserviço de contas está rodando.
-@FeignClient(name = "accountClient", url = "http://localhost:8080/api/accounts")
+@FeignClient(name = "accountClient", url = "http://localhost:8080")
 public interface AccountClient {
 
     // Faz um GET real para o outro microsserviço
-    @GetMapping("/balance/{contaId}")
+    @GetMapping("/contas/balance/{contaId}")
     Object verificarContaExistente(@PathVariable("contaId") Long contaId);
 
     /* * Dica: Usamos Object (ou um DTO genérico) como retorno porque

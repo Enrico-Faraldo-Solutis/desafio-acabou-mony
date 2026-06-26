@@ -91,14 +91,13 @@ function UsersPage() {
               <th>Nome</th>
               <th>Email</th>
               <th>CPF</th>
-              <th>Telefone</th>
               <th>Ações</th>
             </tr>
           </thead>
           <tbody>
             {users.length === 0 ? (
               <tr>
-                <td colSpan="6" className="empty-state">
+                <td colSpan="5" className="empty-state">
                   Nenhum usuário encontrado
                 </td>
               </tr>
@@ -109,7 +108,6 @@ function UsersPage() {
                   <td>{user.nome}</td>
                   <td>{user.email}</td>
                   <td>{user.cpf}</td>
-                  <td>{user.telefone || '-'}</td>
                   <td>
                     <button
                       onClick={() => handleViewUser(user.id)}

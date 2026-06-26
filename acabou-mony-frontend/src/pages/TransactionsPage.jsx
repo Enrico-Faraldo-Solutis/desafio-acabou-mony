@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import { transactionService } from '../services/transactionService';
 import { accountService } from '../services/accountService';
 import './TransactionsPage.css';
 
 function TransactionsPage() {
+  const { user } = useAuth();
   const [transactions, setTransactions] = useState([]);
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,7 +17,7 @@ function TransactionsPage() {
     contaOrigemId: '',
     contaDestinoId: '',
     valor: '',
-    descricao: ''
+    tipo: 'TRANSFERENCIA'
   });
   const [creating, setCreating] = useState(false);
   
@@ -66,8 +68,11 @@ function TransactionsPage() {
 
     try {
       await transactionService.createTransaction({
-        ...createForm,
-        valor: parseFloat(createForm.valor)
+        contaOrigemId: parseInt(createForm.contaOrigemId),
+        contaDestinoId: parseInt(createForm.contaDestinoId),
+        valor: parseFloat(createForm.valor),
+        tipo: createForm.tipo,
+        usuarioId: user?.id || null
       });
       
       setShowCreateModal(false);
@@ -75,7 +80,7 @@ function TransactionsPage() {
         contaOrigemId: '',
         contaDestinoId: '',
         valor: '',
-        descricao: ''
+        tipo: 'TRANSFERENCIA'
       });
       
       // Reload transactions
@@ -200,8 +205,8 @@ function TransactionsPage() {
               <th>Origem</th>
               <th>Destino</th>
               <th>Valor</th>
+              <th>Tipo</th>
               <th>Status</th>
-              <th>Descrição</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -216,17 +221,15 @@ function TransactionsPage() {
               transactions.map((transaction) => (
                 <tr key={transaction.id}>
                   <td>#{transaction.id}</td>
-                  <td>{formatTimestamp(transaction.dataHora)}</td>
+                  <td>{formatTimestamp(transaction.dataTransacao)}</td>
                   <td>Conta #{transaction.contaOrigemId}</td>
                   <td>Conta #{transaction.contaDestinoId}</td>
                   <td className="amount-cell">{formatCurrency(transaction.valor)}</td>
+                  <td>{transaction.tipo || '-'}</td>
                   <td>
                     <span className={`status-badge ${getStatusBadgeClass(transaction.status)}`}>
                       {getStatusLabel(transaction.status)}
                     </span>
-                  </td>
-                  <td className="description-cell">
-                    {transaction.descricao || '-'}
                   </td>
                   <td>
                     <button
@@ -310,15 +313,18 @@ function TransactionsPage() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="descricao">Descrição</label>
-                <textarea
-                  id="descricao"
-                  value={createForm.descricao}
-                  onChange={(e) => setCreateForm({ ...createForm, descricao: e.target.value })}
-                  placeholder="Descrição da transação (opcional)"
-                  rows="3"
+                <label htmlFor="tipo">Tipo de Transação *</label>
+                <select
+                  id="tipo"
+                  value={createForm.tipo}
+                  onChange={(e) => setCreateForm({ ...createForm, tipo: e.target.value })}
+                  required
                   disabled={creating}
-                />
+                >
+                  <option value="TRANSFERENCIA">Transferência</option>
+                  <option value="DEBITO">Débito</option>
+                  <option value="CREDITO">Crédito</option>
+                </select>
               </div>
 
               <div className="modal-actions">

@@ -139,7 +139,7 @@ function AuditLogDetailPage() {
             <div className="card-section">
               <h2>Detalhes Adicionais</h2>
               <div className="details-box">
-                <pre>{log.detalhes}</pre>
+                <pre>{JSON.stringify(log.detalhes, null, 2)}</pre>
               </div>
             </div>
           )}

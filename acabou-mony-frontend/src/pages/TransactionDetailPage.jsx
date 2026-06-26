@@ -157,7 +157,7 @@ function TransactionDetailPage() {
               </div>
               <div className="info-item">
                 <span className="info-label">Data e Hora</span>
-                <span className="info-value">{formatTimestamp(transaction.dataHora)}</span>
+                <span className="info-value">{formatTimestamp(transaction.dataTransacao)}</span>
               </div>
               <div className="info-item">
                 <span className="info-label">Conta de Origem</span>
@@ -172,6 +172,10 @@ function TransactionDetailPage() {
                 <span className="info-value">{formatCurrency(transaction.valor)}</span>
               </div>
               <div className="info-item">
+                <span className="info-label">Tipo</span>
+                <span className="info-value">{transaction.tipo}</span>
+              </div>
+              <div className="info-item">
                 <span className="info-label">Status</span>
                 <span className={`status-badge ${getStatusBadgeClass(transaction.status)}`}>
                   {getStatusLabel(transaction.status)}
@@ -179,16 +183,6 @@ function TransactionDetailPage() {
               </div>
             </div>
           </div>
-
-          {/* Description */}
-          {transaction.descricao && (
-            <div className="card-section">
-              <h2>Descrição</h2>
-              <div className="description-box">
-                {transaction.descricao}
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

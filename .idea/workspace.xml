@@ -4,14 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="frontend finalizado">
+    <list default="true" id="14d172bf-d9cd-434e-bb02-29de66928b0a" name="Changes" comment="tlc-spec-driven implementado">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/AUTH_FLOW.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/FILES_CREATED.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/IMPLEMENTATION_SUMMARY.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/QUICK_START.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/USER_FLOW_VISUAL.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/client/AccountClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/client/AccountClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/service/CardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-card/src/main/java/com/example/acabou_mony_card/service/CardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/AuditLogDetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/AuditLogDetailPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/AuditLogsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/AuditLogsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/CardsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/CardsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/CreateUserPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/CreateUserPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/TransactionDetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/TransactionDetailPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/TransactionsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/TransactionsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/UserDetailPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/UserDetailPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/UsersPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-frontend/src/pages/UsersPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/client/AccountClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/client/AccountClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/client/AuditingClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/client/AuditingClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/auditoria/AuditLogDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/auditoria/AuditLogDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/transacao/TransacaoResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/transacao/TransacaoResponseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/transacao/TransacaoResquestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/dto/transacao/TransacaoResquestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/entity/Transacao.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/entity/Transacao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/mapper/TransacaoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/mapper/TransacaoMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/service/TransacaoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/acabou-mony-transaction/src/main/java/com/example/acabou_mony_transaction/service/TransacaoService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +273,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782320621525</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="tlc-spec-driven implementado">
+      <option name="closed" value="true" />
+      <created>1782396221615</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1782396221616</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,7 +295,8 @@
     <MESSAGE value="corrigindo CORS" />
     <MESSAGE value="frontend login conta e usuario" />
     <MESSAGE value="frontend finalizado" />
-    <option name="LAST_COMMIT_MESSAGE" value="frontend finalizado" />
+    <MESSAGE value="tlc-spec-driven implementado" />
+    <option name="LAST_COMMIT_MESSAGE" value="tlc-spec-driven implementado" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
