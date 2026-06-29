@@ -152,17 +152,13 @@ public class TransacaoService {
             throw new IllegalArgumentException("Conta de destino não encontrada");
         }
 
-        // Debitar da conta de origem
-        BigDecimal novoSaldoOrigem = contaOrigem.getSaldo().subtract(dto.getValor());
-        contaOrigem.setSaldo(novoSaldoOrigem);
-        accountClient.updateBalance(dto.getContaOrigemId(), contaOrigem);
-        log.info("Saldo debitado da conta {}: novo saldo={}", dto.getContaOrigemId(), novoSaldoOrigem);
+        // Debitar da conta de origem (delta negativo)
+        accountClient.updateBalance(dto.getContaOrigemId(), dto.getValor().negate());
+        log.info("Saldo debitado da conta {}: delta={}", dto.getContaOrigemId(), dto.getValor().negate());
 
-        // Creditar na conta de destino
-        BigDecimal novoSaldoDestino = contaDestino.getSaldo().add(dto.getValor());
-        contaDestino.setSaldo(novoSaldoDestino);
-        accountClient.updateBalance(dto.getContaDestinoId(), contaDestino);
-        log.info("Saldo creditado na conta {}: novo saldo={}", dto.getContaDestinoId(), novoSaldoDestino);
+        // Creditar na conta de destino (delta positivo)
+        accountClient.updateBalance(dto.getContaDestinoId(), dto.getValor());
+        log.info("Saldo creditado na conta {}: delta={}", dto.getContaDestinoId(), dto.getValor());
     }
 
     /**
@@ -231,7 +227,12 @@ public class TransacaoService {
         log.info("Buscando transações para conta: {}", contaId);
         List<Transacao> transacoes = transacaoRepository.findByContaOrigemIdOrContaDestinoId(contaId, contaId);
         return transacoes.stream()
-                .map(transacaoMapper::toResponseDto)
+                .map(t -> {
+                    TransacaoResponseDto dto = transacaoMapper.toResponseDto(t);
+                    dto.setNomeOrigem(accountClient.getAccountHolderName(t.getContaOrigemId()));
+                    dto.setNomeDestino(accountClient.getAccountHolderName(t.getContaDestinoId()));
+                    return dto;
+                })
                 .collect(Collectors.toList());
     }
 

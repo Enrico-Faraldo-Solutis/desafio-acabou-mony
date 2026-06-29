@@ -1,11 +1,12 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import { LogOut, User, CreditCard, ArrowRightLeft, FileText, LayoutDashboard, Shield } from 'lucide-react'
+import { LogOut, User, CreditCard, ArrowRightLeft, FileText, LayoutDashboard, Shield, Wallet } from 'lucide-react'
 
 const navItems = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/transactions', label: 'Extrato', icon: FileText },
   { to: '/transfer', label: 'Transferir', icon: ArrowRightLeft },
+  { to: '/deposit', label: 'Depositar', icon: Wallet },
   { to: '/cards', label: 'Cartões', icon: CreditCard },
   { to: '/profile', label: 'Perfil', icon: User },
 ]

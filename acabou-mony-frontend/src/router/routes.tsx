@@ -10,6 +10,7 @@ import Register from '../pages/Register/Register'
 import Dashboard from '../pages/Dashboard/Dashboard'
 import Transactions from '../pages/Transactions/Transactions'
 import Transfer from '../pages/Transfer/Transfer'
+import Deposit from '../pages/Deposit/Deposit'
 import CardList from '../pages/Cards/CardList'
 import CardNew from '../pages/Cards/CardNew'
 import Profile from '../pages/Profile/Profile'
@@ -31,6 +32,7 @@ export function AppRoutes() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/transfer" element={<Transfer />} />
+          <Route path="/deposit" element={<Deposit />} />
           <Route path="/cards" element={<CardList />} />
           <Route path="/cards/new" element={<CardNew />} />
           <Route path="/profile" element={<Profile />} />

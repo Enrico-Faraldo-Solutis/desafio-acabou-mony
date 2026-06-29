@@ -167,10 +167,16 @@ export default function Dashboard() {
           ) : cards && cards.length > 0 ? (
             <div className="flex flex-col gap-3">
               {cards.slice(0, 3).map((card) => (
-                <div key={card.id} className="flex items-center justify-between border-b border-gray-100 pb-2 last:border-0">
-                  <div>
+                <div key={card.id} className="flex items-center gap-3 border-b border-gray-100 pb-2 last:border-0">
+                  <div className="flex h-12 w-20 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-800 text-[8px] text-white">
+                    <div className="text-center leading-tight">
+                      <p className="font-bold">****</p>
+                      <p>{card.numeroCartao.slice(-4)}</p>
+                    </div>
+                  </div>
+                  <div className="flex-1">
                     <p className="text-sm font-medium text-secondary">{card.nomeImpresso}</p>
-                    <p className="text-xs text-gray-500">{card.numeroCartao}</p>
+                    <p className="text-xs text-gray-400">CVV: {card.cvv}</p>
                   </div>
                   <Badge variant={card.ativo ? 'success' : 'error'}>
                     {card.ativo ? 'ATIVO' : 'BLOQUEADO'}

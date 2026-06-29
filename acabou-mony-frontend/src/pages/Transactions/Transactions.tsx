@@ -88,7 +88,9 @@ export default function Transactions() {
       {filtered.length > 0 ? (
         <Card>
           <div className="flex flex-col divide-y divide-gray-100">
-            {filtered.map((tx) => (
+              {filtered.map((tx) => {
+                const isOutgoing = tx.contaOrigemId === contaId
+                return (
               <div key={tx.id} className="flex items-center justify-between py-3 first:pt-0 last:pb-0">
                 <div className="flex items-center gap-3">
                   <div className={`rounded-full p-2 ${
@@ -102,23 +104,27 @@ export default function Transactions() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-secondary">
-                      {tx.tipo}
+                      {tx.tipo === 'TRANSFERENCIA' ? (isOutgoing ? 'Transferência enviada' : 'Transferência recebida') : tx.tipo}
                     </p>
-                    <p className="text-xs text-gray-500">{formatDate(tx.dataTransacao)}</p>
+                    <p className="text-xs text-gray-500">
+                      {isOutgoing ? tx.nomeDestino : tx.nomeOrigem}
+                    </p>
+                    <p className="text-xs text-gray-400">{formatDate(tx.dataTransacao)}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className={`text-sm font-semibold ${
-                    tx.status === 'FALHA' ? 'text-red-600' : 'text-secondary'
+                    tx.status === 'FALHA' ? 'text-red-600' : isOutgoing ? 'text-red-600' : 'text-green-600'
                   }`}>
-                    {tx.status === 'FALHA' ? '-' : ''}{formatCurrency(tx.valor)}
+                    {isOutgoing ? '-' : '+'}{formatCurrency(tx.valor)}
                   </span>
                   <Badge variant={statusVariant(tx.status)}>
                     {statusLabel(tx.status)}
                   </Badge>
                 </div>
               </div>
-            ))}
+                )
+              })}
           </div>
         </Card>
       ) : (

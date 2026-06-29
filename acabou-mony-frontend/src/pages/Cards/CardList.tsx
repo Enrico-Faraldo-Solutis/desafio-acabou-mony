@@ -1,11 +1,59 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useAuth } from '../../context/AuthContext'
-import { getCards, updateCardStatus } from '../../api/card'
+import { getCards, updateCardStatus, deleteCard } from '../../api/card'
 import { Card } from '../../components/ui/Card'
 import { Badge } from '../../components/ui/Badge'
 import { Button } from '../../components/ui/Button'
 import { Link } from 'react-router-dom'
-import { Plus, Ban, CheckCircle, CreditCard } from 'lucide-react'
+import { Plus, Ban, CheckCircle, Trash2 } from 'lucide-react'
+
+function formatCardNumber(num: string): string {
+  return num.replace(/(\d{4})(?=\d)/g, '$1 ')
+}
+
+function formatValidity(date: string): string {
+  if (!date) return ''
+  const d = new Date(date)
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const year = String(d.getFullYear()).slice(-2)
+  return `${month}/${year}`
+}
+
+function CardFront({ card }: { card: { nomeImpresso: string; numeroCartao: string; cvv: string; dataValidade: string; ativo: boolean; id: number } }) {
+  return (
+    <div className="relative h-52 w-full rounded-xl bg-gradient-to-br from-blue-700 to-blue-900 p-5 text-white shadow-lg">
+      <div className="flex items-start justify-between">
+        <span className="text-xs font-medium tracking-wider opacity-80">CARTÃO DE CRÉDITO</span>
+        <span className="text-lg font-bold tracking-wider">VISA</span>
+      </div>
+
+      <div className="mt-6">
+        <p className="font-mono text-lg tracking-widest">{formatCardNumber(card.numeroCartao)}</p>
+      </div>
+
+      <div className="mt-4 flex gap-8">
+        <div>
+          <p className="text-[10px] uppercase tracking-wider opacity-70">Validade</p>
+          <p className="font-mono text-sm">{formatValidity(card.dataValidade)}</p>
+        </div>
+        <div>
+          <p className="text-[10px] uppercase tracking-wider opacity-70">CVV</p>
+          <p className="font-mono text-sm">{card.cvv}</p>
+        </div>
+      </div>
+
+      <div className="mt-3">
+        <p className="font-mono text-sm uppercase tracking-wider">{card.nomeImpresso}</p>
+      </div>
+
+      {!card.ativo && (
+        <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-black/50">
+          <span className="rounded-lg bg-red-600 px-4 py-2 text-sm font-bold uppercase">Bloqueado</span>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function CardList() {
   const { contaId } = useAuth()
@@ -22,8 +70,19 @@ export default function CardList() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cards'] }),
   })
 
+  const deleteMutation = useMutation({
+    mutationFn: (id: number) => deleteCard(id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['cards'] }),
+  })
+
   function handleToggleStatus(id: number) {
     toggleMutation.mutate(id)
+  }
+
+  function handleDelete(id: number) {
+    if (window.confirm('Tem certeza que deseja excluir este cartão?')) {
+      deleteMutation.mutate(id)
+    }
   }
 
   if (isFetching) {
@@ -32,7 +91,7 @@ export default function CardList() {
         <h1 className="text-2xl font-bold text-secondary">Cartões</h1>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-40 animate-pulse rounded-xl bg-gray-200" />
+            <div key={i} className="h-52 animate-pulse rounded-xl bg-gray-200" />
           ))}
         </div>
       </div>
@@ -58,41 +117,44 @@ export default function CardList() {
       )}
 
       {cards && cards.length > 0 ? (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {cards.map((card) => (
-            <Card key={card.id} className="relative">
-              <div className="flex items-start justify-between">
-                <div>
-                  <p className="text-sm font-medium text-gray-500">{card.nomeImpresso}</p>
-                  <p className="mt-1 text-lg font-semibold text-secondary">{card.numeroCartao}</p>
-                  <p className="mt-1 text-xs text-gray-400">Validade: {card.dataValidade}</p>
-                </div>
-                <CreditCard size={24} className="text-primary" />
-              </div>
-              <div className="mt-4 flex items-center justify-between">
+            <Card key={card.id} className="relative p-0 overflow-hidden">
+              <CardFront card={card} />
+              <div className="flex items-center justify-between p-3">
                 <Badge variant={card.ativo ? 'success' : 'error'}>
                   {card.ativo ? 'ATIVO' : 'BLOQUEADO'}
                 </Badge>
-                <Button
-                  variant={card.ativo ? 'danger' : 'outline'}
-                  size="sm"
-                  onClick={() => handleToggleStatus(card.id)}
-                  loading={toggleMutation.isPending && toggleMutation.variables === card.id}
-                >
-                  {card.ativo ? (
-                    <><Ban size={14} /> Bloquear</>
-                  ) : (
-                    <><CheckCircle size={14} /> Desbloquear</>
-                  )}
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant={card.ativo ? 'danger' : 'outline'}
+                    size="sm"
+                    onClick={() => handleToggleStatus(card.id)}
+                    loading={toggleMutation.isPending && toggleMutation.variables === card.id}
+                  >
+                    {card.ativo ? (
+                      <><Ban size={14} /> Bloquear</>
+                    ) : (
+                      <><CheckCircle size={14} /> Desbloquear</>
+                    )}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleDelete(card.id)}
+                    loading={deleteMutation.isPending && deleteMutation.variables === card.id}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <Trash2 size={14} />
+                  </Button>
+                </div>
               </div>
             </Card>
           ))}
         </div>
       ) : (
         <div className="flex flex-col items-center gap-4 rounded-xl border-2 border-dashed border-gray-300 p-12">
-          <CreditCard size={48} className="text-gray-300" />
-          <p className="text-gray-500">Nenhum cartão encontrado</p>
+          <p className="text-gray-400 text-sm">Nenhum cartão encontrado</p>
           <Link to="/cards/new">
             <Button>
               <Plus size={16} />

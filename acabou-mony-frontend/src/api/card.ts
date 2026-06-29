@@ -15,3 +15,7 @@ export async function updateCardStatus(id: number): Promise<Cartao> {
   const response = await api.put(`/api/cards/${id}/toggle-status`)
   return response.data
 }
+
+export async function deleteCard(id: number): Promise<void> {
+  await api.delete(`/api/cards/${id}`)
+}

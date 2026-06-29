@@ -8,6 +8,8 @@ export interface Transacao {
   id: number
   contaOrigemId: number
   contaDestinoId: number
+  nomeOrigem: string
+  nomeDestino: string
   valor: number
   tipo: string
   status: string

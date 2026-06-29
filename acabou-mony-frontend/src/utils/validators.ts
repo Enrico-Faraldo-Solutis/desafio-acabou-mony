@@ -19,7 +19,7 @@ export const verify2FASchema = z.object({
 export const transferSchema = z.object({
   contaDestinoId: z.number().positive('Conta destino deve ser positiva'),
   valor: z.number().positive('Valor deve ser positivo'),
-  tipo: z.enum(['TRANSFERENCIA', 'PAGAMENTO', 'RECARGA']),
+  tipo: z.enum(['TRANSFERENCIA', 'PAGAMENTO']),
 })
 
 export const cardSchema = z.object({

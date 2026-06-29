@@ -25,6 +25,7 @@ public class CartaoMapper {
         dto.setContaId(entity.getContaId());
         dto.setNumeroCartao(entity.getNumeroCartao());
         dto.setNomeImpresso(entity.getNomeImpresso());
+        dto.setCvv(entity.getCvv());
         dto.setDataValidade(entity.getDataValidade());
         dto.setAtivo(entity.isAtivo());
         return dto;

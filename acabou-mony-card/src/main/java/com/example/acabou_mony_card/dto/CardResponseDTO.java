@@ -9,6 +9,7 @@ public class CardResponseDTO {
     private Long contaId;
     private String numeroCartao;
     private String nomeImpresso;
+    private String cvv;
     private LocalDate dataValidade;
     private boolean ativo;
 }

@@ -16,6 +16,11 @@ export async function getBalance(contaId: number): Promise<Balance> {
   return response.data
 }
 
+export async function updateBalance(contaId: number, valor: number): Promise<Conta> {
+  const response = await api.put('/api/accounts/balance', { contaId, valor })
+  return response.data
+}
+
 export async function listAccounts(): Promise<Conta[]> {
   const token = localStorage.getItem('acabou_mony_token')
   const headers: Record<string, string> = { 'Content-Type': 'application/json' }

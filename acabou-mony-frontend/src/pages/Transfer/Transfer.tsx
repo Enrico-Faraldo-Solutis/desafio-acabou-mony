@@ -103,7 +103,6 @@ export default function Transfer() {
             >
               <option value="TRANSFERENCIA">Transferência</option>
               <option value="PAGAMENTO">Pagamento</option>
-              <option value="RECARGA">Recarga</option>
             </select>
             {errors.tipo?.message && (
               <span className="text-xs text-red-600">{errors.tipo.message}</span>

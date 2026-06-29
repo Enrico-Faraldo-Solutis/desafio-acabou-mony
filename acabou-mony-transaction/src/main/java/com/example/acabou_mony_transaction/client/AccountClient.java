@@ -7,6 +7,8 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import java.math.BigDecimal;
+import java.util.Map;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -71,22 +73,15 @@ public class AccountClient {
      */
     @Retry(name = "accountService")
     @CircuitBreaker(name = "accountService", fallbackMethod = "updateBalanceFallback")
-    public ContaEspelhoDto updateBalance(Long contaId, ContaEspelhoDto contaEspelhoDto) {
-        log.info("Updating balance for account: {}", contaId);
+    public ContaEspelhoDto updateBalance(Long contaId, BigDecimal delta) {
+        log.info("Updating balance for account: {} with delta: {}", contaId, delta);
         String url = accountServiceUrl + "/api/accounts/balance";
         try {
-            // 1. Monta o payload com as propriedades 'contaId' e 'valor' que o Account espera
-            // Nota: certifique-se se 'valor' lá no Account significa o NOVO SALDO (contaEspelhoDto.getSaldo())
-            // ou se significa o VALOR DA TRANSAÇÃO (o delta a ser somado/subtraído).
-            AtualizarSaldoRequestDto payload = new AtualizarSaldoRequestDto(
-                    contaId,
-                    contaEspelhoDto.getSaldo()
-            );
+            AtualizarSaldoRequestDto payload = new AtualizarSaldoRequestDto(contaId, delta);
 
-            // 2. Coloca o payload correto na entidade da requisição
-            org.springframework.http.HttpEntity<AtualizarSaldoRequestDto> requestEntity = new org.springframework.http.HttpEntity<>(payload);
+            org.springframework.http.HttpEntity<AtualizarSaldoRequestDto> requestEntity =
+                    new org.springframework.http.HttpEntity<>(payload);
 
-            // 3. Dispara o PUT
             org.springframework.http.ResponseEntity<ContaEspelhoDto> response = restTemplate.exchange(
                     url,
                     org.springframework.http.HttpMethod.PUT,
@@ -106,14 +101,32 @@ public class AccountClient {
      * Fallback method for updateBalance when circuit breaker is open
      *
      * @param contaId o ID da conta
-     * @param contaEspelhoDto os dados da conta
+     * @param delta o valor do delta
      * @param ex a exceção que acionou o fallback
      * @return nunca retorna (sempre lança exceção)
      * @throws AccountServiceUnavailableException sempre
      */
-    public ContaEspelhoDto updateBalanceFallback(Long contaId, ContaEspelhoDto contaEspelhoDto, Exception ex) {
+    public ContaEspelhoDto updateBalanceFallback(Long contaId, BigDecimal delta, Exception ex) {
         log.error("Circuit breaker fallback triggered for account update: {}. Cause: {}", contaId, ex.getMessage());
         throw new AccountServiceUnavailableException("Account service is currently unavailable. Please try again later.", ex);
+    }
+
+    public String getAccountHolderName(Long contaId) {
+        try {
+            ContaEspelhoDto conta = getBalance(contaId);
+            if (conta == null || conta.getUsuarioId() == null) {
+                return "Conta " + contaId;
+            }
+            String url = accountServiceUrl + "/api/accounts/users/" + conta.getUsuarioId();
+            Map<String, Object> response = restTemplate.getForObject(url, Map.class);
+            if (response != null && response.get("nome") != null) {
+                return (String) response.get("nome");
+            }
+            return "Usuário " + conta.getUsuarioId();
+        } catch (Exception e) {
+            log.warn("Failed to resolve name for account {}: {}", contaId, e.getMessage());
+            return "Conta " + contaId;
+        }
     }
 }
 

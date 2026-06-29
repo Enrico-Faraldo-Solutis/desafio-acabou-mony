@@ -28,6 +28,12 @@ public class TransacaoResponseDto {
     @Schema(description = "Destination account ID", example = "2")
     private Long contaDestinoId;
 
+    @Schema(description = "Source account holder name", example = "João Silva")
+    private String nomeOrigem;
+
+    @Schema(description = "Destination account holder name", example = "Maria Souza")
+    private String nomeDestino;
+
     @Schema(description = "Transaction amount", example = "100.50")
     private BigDecimal valor;
 

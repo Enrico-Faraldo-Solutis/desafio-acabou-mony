@@ -38,4 +38,11 @@ public class CardController {
         CardResponseDTO cartaoAtualizado = cardService.alternarStatusCartao(id);
         return ResponseEntity.ok(cartaoAtualizado);
     }
+
+    // Exclui permanentemente um cartão
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarCartao(@PathVariable Long id) {
+        cardService.deletarCartao(id);
+        return ResponseEntity.noContent().build();
+    }
 }

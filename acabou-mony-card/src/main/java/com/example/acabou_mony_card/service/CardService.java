@@ -61,6 +61,13 @@ public class CardService {
         return cartaoMapper.toDto(cartaoRepository.save(cartao));
     }
 
+    @Transactional
+    public void deletarCartao(Long id) {
+        Cartao cartao = cartaoRepository.findById(id)
+                .orElseThrow(() -> new CartaoNaoEncontradoException("Cartão não localizado com o ID: " + id));
+        cartaoRepository.delete(cartao);
+    }
+
     private String gerarNumeroCartaoFicticio() {
         StringBuilder sb = new StringBuilder("4"); // Começa com 4 para simular bandeira Visa
         for (int i = 0; i < 15; i++) {
