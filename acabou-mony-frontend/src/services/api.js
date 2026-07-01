@@ -30,6 +30,11 @@ export const authService = {
     return response.data;
   },
 
+  register: async (userData) => {
+    const response = await api.post('/acabou-mony-account/usuarios', userData);
+    return response.data;
+  },
+
   verify2FA: async (usuarioId, codigo) => {
     const response = await api.post('/acabou-mony-auth/verify-2fa', { usuarioId, codigo });
     return response.data;
@@ -50,3 +55,4 @@ export const authService = {
 };
 
 export default api;
+

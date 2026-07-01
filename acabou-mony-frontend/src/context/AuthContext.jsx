@@ -31,19 +31,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (userData) => {
+    try {
+      const response = await authService.register(userData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const verify2FA = async (usuarioId, codigo) => {
     try {
       const response = await authService.verify2FA(usuarioId, codigo);
       const { token } = response;
-      
+
       // Store token and user info
       localStorage.setItem('authToken', token);
       localStorage.setItem('userId', usuarioId);
-      localStorage.removeItem('tempUserId');
-      
+    localStorage.removeItem('tempUserId');
+
       setToken(token);
       setUser({ id: usuarioId });
-      
+
       return response;
     } catch (error) {
       throw error;
@@ -62,10 +71,11 @@ export const AuthProvider = ({ children }) => {
     token,
     loading,
     login,
+    register,
     verify2FA,
     logout,
     isAuthenticated: !!token,
-  };
+};
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
@@ -77,3 +87,4 @@ export const useAuth = () => {
   }
   return context;
 };
+

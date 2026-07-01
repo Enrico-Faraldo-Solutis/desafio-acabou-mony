@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './LoginPage.css';
 
@@ -7,14 +7,26 @@ function LoginPage() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
   
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
+
+  useEffect(() => {
+    // Check if there's a success message from registration
+    if (location.state?.message) {
+      setSuccess(location.state.message);
+      // Clear the message from location state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setLoading(true);
 
     try {
@@ -43,8 +55,11 @@ function LoginPage() {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1>Acabou o Mony</h1>
-          <p>Faça login para continuar</p>
+          <div className="logo">
+            <span className="logo-icon">💰</span>
+            <h1>AcabouMony</h1>
+          </div>
+          <p>Plataforma de Gerenciamento Bancário</p>
         </div>
 
         <form onSubmit={handleSubmit} className="login-form">
@@ -74,6 +89,7 @@ function LoginPage() {
             />
           </div>
 
+          {success && <div className="success-message">{success}</div>}
           {error && <div className="error-message">{error}</div>}
 
           <button type="submit" className="btn-primary" disabled={loading}>
@@ -82,7 +98,10 @@ function LoginPage() {
         </form>
 
         <div className="login-footer">
-          <p>Primeira vez aqui? <a href="/register">Criar conta</a></p>
+          <p>💳 Sua plataforma segura de pagamentos</p>
+          <p style={{ marginTop: '16px' }}>
+            Não tem uma conta? <a href="/register">Cadastre-se aqui</a>
+          </p>
         </div>
       </div>
     </div>
@@ -90,3 +109,4 @@ function LoginPage() {
 }
 
 export default LoginPage;
+

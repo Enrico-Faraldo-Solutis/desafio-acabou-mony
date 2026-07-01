@@ -8,6 +8,12 @@ export const cardService = {
     return response.data;
   },
 
+  // List all cards
+  getAllCards: async () => {
+    const response = await api.get('/acabou-mony-card/');
+    return response.data;
+  },
+
   // List all cards by account ID
   listCardsByAccount: async (contaId) => {
     const response = await api.get(`/acabou-mony-card/account/${contaId}`);
@@ -22,3 +28,4 @@ export const cardService = {
 };
 
 export default cardService;
+

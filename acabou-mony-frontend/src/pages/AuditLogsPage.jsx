@@ -1,317 +1,94 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auditingService } from '../services/auditingService';
+import auditingService from '../services/auditingService';
 import './AuditLogsPage.css';
 
 function AuditLogsPage() {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalElements, setTotalElements] = useState(0);
-  
-  // Filters
-  const [filterType, setFilterType] = useState('all'); // all, user, action, entity
-  const [filterValue, setFilterValue] = useState('');
-  const [entityName, setEntityName] = useState('');
-  const [entityId, setEntityId] = useState('');
-  
   const navigate = useNavigate();
 
   useEffect(() => {
     loadLogs();
-  }, [page, filterType]);
+  }, []);
 
   const loadLogs = async () => {
-    setLoading(true);
-    setError('');
-    
     try {
-      let response;
-      
-      switch (filterType) {
-        case 'user':
-          if (filterValue) {
-            response = await auditingService.listLogsByUser(filterValue, page, 10);
-          } else {
-            response = await auditingService.listAllLogs(page, 10);
-          }
-          break;
-        case 'action':
-          if (filterValue) {
-            response = await auditingService.listLogsByAction(filterValue, page, 10);
-          } else {
-            response = await auditingService.listAllLogs(page, 10);
-          }
-          break;
-        case 'entity':
-          if (entityName && entityId) {
-            response = await auditingService.listLogsByEntity(entityName, entityId, page, 10);
-          } else {
-            response = await auditingService.listAllLogs(page, 10);
-          }
-          break;
-        default:
-          response = await auditingService.listAllLogs(page, 10);
-      }
-      
-      setLogs(response.content || []);
-      setTotalPages(response.totalPages || 0);
-      setTotalElements(response.totalElements || 0);
+      setLoading(true);
+      setError('');
+      const response = await auditingService.listAllLogs?.(0, 100);
+      setLogs(response?.content || []);
     } catch (err) {
-      console.error('Error loading audit logs:', err);
-      setError('Erro ao carregar logs de auditoria. Tente novamente.');
+      console.error('Erro ao carregar auditoria:', err);
+      setError('Erro ao carregar logs de auditoria.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleApplyFilter = () => {
-    setPage(0);
-    loadLogs();
+  const getAuditIcon = (acao) => {
+    if (acao?.includes('CRIAR')) return '➕';
+    if (acao?.includes('ATUALIZAR')) return '✏️';
+    if (acao?.includes('DELETAR')) return '🗑️';
+    if (acao?.includes('LOGIN')) return '🔓';
+    if (acao?.includes('LOGOUT')) return '🔒';
+    if (acao?.includes('ALTERAR')) return '🔄';
+    return '📝';
   };
 
-  const handleClearFilter = () => {
-    setFilterType('all');
-    setFilterValue('');
-    setEntityName('');
-    setEntityId('');
-    setPage(0);
+  const getAuditColor = (acao) => {
+    if (acao?.includes('DELETAR')) return 'danger';
+    if (acao?.includes('CRIAR')) return 'success';
+    if (acao?.includes('LOGIN')) return 'info';
+    return 'warning';
   };
-
-  const handleViewLog = (logId) => {
-    navigate(`/audit-logs/${logId}`);
-  };
-
-  const handlePreviousPage = () => {
-    if (page > 0) setPage(page - 1);
-  };
-
-  const handleNextPage = () => {
-    if (page < totalPages - 1) setPage(page + 1);
-  };
-
-  const formatTimestamp = (timestamp) => {
-    return new Date(timestamp).toLocaleString('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
-  };
-
-  const getActionBadgeClass = (action) => {
-    const actionLower = action?.toLowerCase() || '';
-    if (actionLower.includes('create') || actionLower.includes('criar') || actionLower.includes('concluida')) return 'badge-success';
-    if (actionLower.includes('update') || actionLower.includes('atualizar')) return 'badge-info';
-    if (actionLower.includes('delete') || actionLower.includes('deletar') || actionLower.includes('falha')) return 'badge-danger';
-    if (actionLower.includes('login')) return 'badge-primary';
-    return 'badge-default';
-  };
-
-  if (loading && logs.length === 0) {
-    return (
-      <div className="audit-logs-page">
-        <div className="loading">Carregando logs de auditoria...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="audit-logs-page">
-      <div className="audit-header">
-        <div>
-          <h1>📋 Logs de Auditoria</h1>
-          <p>Visualize e filtre logs de ações críticas do sistema</p>
+      <div className="page-header">
+        <div className="page-title">
+          <h1>🔍 Auditoria</h1>
+          <p>Logs de segurança e ações críticas do sistema</p>
         </div>
       </div>
 
       {error && <div className="error-message">{error}</div>}
 
-      {/* Filters Section */}
-      <div className="filters-section">
-        <div className="filter-group">
-          <label>Tipo de Filtro:</label>
-          <select
-            value={filterType}
-            onChange={(e) => setFilterType(e.target.value)}
-            className="filter-select"
-          >
-            <option value="all">Todos os Logs</option>
-            <option value="user">Por Usuário</option>
-            <option value="action">Por Ação</option>
-            <option value="entity">Por Entidade</option>
-          </select>
+      {loading ? (
+        <div className="loading-spinner">
+          <div className="spinner"></div>
         </div>
-
-        {filterType === 'user' && (
-          <div className="filter-group">
-            <label>ID do Usuário:</label>
-            <input
-              type="number"
-              value={filterValue}
-              onChange={(e) => setFilterValue(e.target.value)}
-              placeholder="Digite o ID do usuário"
-              className="filter-input"
-            />
-          </div>
-        )}
-
-        {filterType === 'action' && (
-          <div className="filter-group">
-            <label>Ação:</label>
-            <select
-              value={filterValue}
-              onChange={(e) => setFilterValue(e.target.value)}
-              className="filter-select"
+      ) : logs.length === 0 ? (
+        <div className="empty-state">
+          <div className="empty-state-icon">🔍</div>
+          <h3>Nenhum log encontrado</h3>
+          <p>Não há registros de auditoria</p>
+        </div>
+      ) : (
+        <div className="audit-logs-list">
+          {logs.map((log) => (
+            <div 
+              key={log.id} 
+              className="audit-log-item"
+              onClick={() => navigate(`/audit-logs/${log.id}`)}
             >
-              <option value="">Selecione uma ação</option>
-              <option value="TRANSACAO_CONCLUIDA">Transação Concluída</option>
-              <option value="TRANSACAO_FALHA">Transação Falha</option>
-              <option value="LOGIN">Login</option>
-              <option value="LOGOUT">Logout</option>
-              <option value="CREATE_USER">Criar Usuário</option>
-              <option value="UPDATE_USER">Atualizar Usuário</option>
-              <option value="DELETE_USER">Deletar Usuário</option>
-              <option value="CREATE_ACCOUNT">Criar Conta</option>
-              <option value="UPDATE_ACCOUNT">Atualizar Conta</option>
-              <option value="GENERATE_CARD">Gerar Cartão</option>
-              <option value="BLOCK_CARD">Bloquear Cartão</option>
-              <option value="UNBLOCK_CARD">Desbloquear Cartão</option>
-            </select>
-          </div>
-        )}
-
-        {filterType === 'entity' && (
-          <>
-            <div className="filter-group">
-              <label>Nome da Entidade:</label>
-              <select
-                value={entityName}
-                onChange={(e) => setEntityName(e.target.value)}
-                className="filter-select"
-              >
-                <option value="">Selecione uma entidade</option>
-                <option value="TRANSACAO">Transação</option>
-                <option value="USUARIO">Usuário</option>
-                <option value="CONTA">Conta</option>
-                <option value="CARTAO">Cartão</option>
-              </select>
+              <div className="log-icon">{getAuditIcon(log.acao)}</div>
+              <div className="log-info">
+                <h4 className="log-title">{log.acao || 'Ação'}</h4>
+                <div className="log-details">
+                  <span className="log-user">👤 {log.usuario || 'Sistema'}</span>
+                  <span className="log-entity">📦 {log.entidade || 'N/A'}</span>
+                  <span className="log-time">⏰ {new Date(log.dataHora).toLocaleDateString('pt-BR')}</span>
+                </div>
+              </div>
+              <div className="log-status">
+                <span className={`status-badge ${getAuditColor(log.acao)}`}>
+                  {log.resultado || 'Sucesso'}
+                </span>
+              </div>
             </div>
-            <div className="filter-group">
-              <label>ID da Entidade:</label>
-              <input
-                type="number"
-                value={entityId}
-                onChange={(e) => setEntityId(e.target.value)}
-                placeholder="Digite o ID"
-                className="filter-input"
-              />
-            </div>
-          </>
-        )}
-
-        <div className="filter-actions">
-          <button onClick={handleApplyFilter} className="btn-apply">
-            Aplicar Filtro
-          </button>
-          <button onClick={handleClearFilter} className="btn-clear">
-            Limpar
-          </button>
-        </div>
-      </div>
-
-      {/* Stats */}
-      <div className="audit-stats">
-        <div className="stat-card">
-          <span className="stat-label">Total de Logs</span>
-          <span className="stat-value">{totalElements}</span>
-        </div>
-        <div className="stat-card">
-          <span className="stat-label">Página Atual</span>
-          <span className="stat-value">{page + 1} de {totalPages}</span>
-        </div>
-      </div>
-
-      {/* Logs Table */}
-      <div className="logs-table-container">
-        <table className="logs-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Timestamp</th>
-              <th>Usuário</th>
-              <th>Ação</th>
-              <th>Entidade</th>
-              <th>Detalhes</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {logs.length === 0 ? (
-              <tr>
-                <td colSpan="7" className="empty-state">
-                  Nenhum log encontrado
-                </td>
-              </tr>
-            ) : (
-              logs.map((log) => (
-                <tr key={log.id}>
-                  <td>{log.id}</td>
-                  <td>{formatTimestamp(log.timestamp)}</td>
-                  <td>{log.usuarioId || '-'}</td>
-                  <td>
-                    <span className={`action-badge ${getActionBadgeClass(log.acao)}`}>
-                      {log.acao}
-                    </span>
-                  </td>
-                  <td>
-                    {log.entidadeNome && log.entidadeId 
-                      ? `${log.entidadeNome} #${log.entidadeId}`
-                      : '-'
-                    }
-                  </td>
-                  <td className="details-cell">
-                    {log.detalhes ? JSON.stringify(log.detalhes).substring(0, 50) + '...' : '-'}
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleViewLog(log.id)}
-                      className="btn-view-small"
-                    >
-                      Ver
-                    </button>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button
-            onClick={handlePreviousPage}
-            disabled={page === 0}
-            className="btn-pagination"
-          >
-            ← Anterior
-          </button>
-          <span className="pagination-info">
-            Página {page + 1} de {totalPages}
-          </span>
-          <button
-            onClick={handleNextPage}
-            disabled={page >= totalPages - 1}
-            className="btn-pagination"
-          >
-            Próxima →
-          </button>
+          ))}
         </div>
       )}
     </div>
@@ -319,3 +96,4 @@ function AuditLogsPage() {
 }
 
 export default AuditLogsPage;
+

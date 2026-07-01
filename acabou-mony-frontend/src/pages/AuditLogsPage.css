@@ -1,101 +1,85 @@
 .audit-logs-page {
-  min-height: 100vh;
-  background-color: #f7fafc;
-  padding: 40px 20px;
-  max-width: 1600px;
-  margin: 0 auto;
+  width: 100%;
 }
 
-.audit-header {
-  margin-bottom: 32px;
-}
-
-.audit-header h1 {
-  color: #1a202c;
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.audit-header p {
-  color: #718096;
-  font-size: 16px;
-}
-
-/* Filters Section */
-.filters-section {
-  background: white;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: flex-end;
-}
-
-.filter-group {
+.audit-logs-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  min-width: 200px;
+  gap: 12px;
 }
 
-.filter-group label {
-  color: #2d3748;
-  font-size: 14px;
-  font-weight: 600;
+.audit-log-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(30, 41, 59, 0.6));
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.filter-select,
-.filter-input {
-  padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: all 0.2s;
+.audit-log-item:hover {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 1), rgba(30, 41, 59, 0.8));
+  border-color: var(--primary-color);
+  transform: translateX(4px);
 }
 
-.filter-select:focus,
-.filter-input:focus {
-  outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+.log-icon {
+  font-size: 28px;
+  min-width: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
 }
 
-.filter-actions {
+.log-info {
+  flex: 1;
+}
+
+.log-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.log-details {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.log-user,
+.log-entity,
+.log-time {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.log-status {
   display: flex;
   gap: 12px;
-  margin-left: auto;
+  align-items: center;
 }
 
-.btn-apply {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
+@media (max-width: 768px) {
+  .audit-log-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-.btn-apply:hover {
-  transform: translateY(-2px);
-}
+  .log-details {
+    flex-direction: column;
+    gap: 8px;
+  }
 
-.btn-clear {
-  background: white;
-  color: #4a5568;
-  padding: 10px 20px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
+  .log-status {
+    width: 100%;
+    justify-content: space-between;
+  }
 }
 
 .btn-clear:hover {

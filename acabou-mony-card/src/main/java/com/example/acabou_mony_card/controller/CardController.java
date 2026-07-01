@@ -25,6 +25,13 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novoCartao);
     }
 
+    // Busca todos os cartões do sistema
+    @GetMapping
+    public ResponseEntity<List<CardResponseDTO>> listarTodosCartoes() {
+        List<CardResponseDTO> cartoes = cardService.listarTodosCartoes();
+        return ResponseEntity.ok(cartoes);
+    }
+
     // Busca todos os cartões vinculados a um ID de conta específico
     @GetMapping("/account/{contaId}")
     public ResponseEntity<List<CardResponseDTO>> listarCartoesPorConta(@PathVariable Long contaId) {

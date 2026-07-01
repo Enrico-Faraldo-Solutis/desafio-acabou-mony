@@ -7,139 +7,86 @@ function AccountsPage() {
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [page, setPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalElements, setTotalElements] = useState(0);
-  
   const navigate = useNavigate();
 
   useEffect(() => {
     loadAccounts();
-  }, [page]);
+  }, []);
 
   const loadAccounts = async () => {
-    setLoading(true);
-    setError('');
-    
     try {
-      const response = await accountService.listAllAccounts(page, 10, 'id');
-      setAccounts(response.content || []);
-      setTotalPages(response.totalPages || 0);
-      setTotalElements(response.totalElements || 0);
+      setLoading(true);
+      setError('');
+      const response = await accountService.listAllAccounts(0, 100);
+      console.log('Accounts response:', response);
+      setAccounts(response?.content || []);
     } catch (err) {
-      console.error('Error loading accounts:', err);
-      setError('Erro ao carregar contas. Tente novamente.');
+      console.error('Erro ao carregar contas:', err);
+      setError('Erro ao carregar contas.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleViewAccount = (accountId) => {
-    navigate(`/accounts/${accountId}`);
-  };
-
-  const handlePreviousPage = () => {
-    if (page > 0) setPage(page - 1);
-  };
-
-  const handleNextPage = () => {
-    if (page < totalPages - 1) setPage(page + 1);
-  };
-
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(value || 0);
-  };
-
-  if (loading) {
-    return (
-      <div className="accounts-page">
-        <div className="loading">Carregando contas...</div>
-      </div>
-    );
-  }
-
   return (
     <div className="accounts-page">
-      <div className="accounts-header">
-        <div>
-          <h1>💳 Contas</h1>
-          <p>Gerencie as contas do sistema</p>
+      <div className="page-header">
+        <div className="page-title">
+          <h1>🏦 Contas</h1>
+          <p>Gerencie suas contas bancárias</p>
+        </div>
+        <div className="page-actions">
+          <button className="btn-primary-action" onClick={() => navigate('/accounts/create')}>
+            ➕ Nova Conta
+          </button>
         </div>
       </div>
 
       {error && <div className="error-message">{error}</div>}
 
-      <div className="accounts-stats">
-        <div className="stat-card">
-          <span className="stat-label">Total de Contas</span>
-          <span className="stat-value">{totalElements}</span>
+      {loading ? (
+        <div className="loading-spinner">
+          <div className="spinner"></div>
         </div>
-        <div className="stat-card">
-          <span className="stat-label">Página Atual</span>
-          <span className="stat-value">{page + 1} de {totalPages}</span>
+      ) : accounts.length === 0 ? (
+        <div className="empty-state">
+          <div className="empty-state-icon">🏦</div>
+          <h3>Nenhuma conta encontrada</h3>
+          <p>Clique em "Nova Conta" para criar sua primeira conta</p>
         </div>
-      </div>
-
-      <div className="accounts-grid">
-        {accounts.length === 0 ? (
-          <div className="empty-state">
-            Nenhuma conta encontrada
-          </div>
-        ) : (
-          accounts.map((account) => (
-            <div key={account.id} className="account-card">
-              <div className="account-card-header">
-                <div className="account-icon">💰</div>
-                <div className="account-id">Conta #{account.id}</div>
-              </div>
-              
-              <div className="account-balance-section">
-                <span className="balance-label">Saldo Disponível</span>
-                <span className="balance-amount">
-                  {formatCurrency(account.saldo)}
+      ) : (
+        <div className="cards-grid">
+          {accounts.map((account) => (
+            <div
+              key={account.id}
+              className="card-item"
+              onClick={() => navigate(`/accounts/${account.id}`)}
+            >
+              <div className="card-item-header">
+                <h3 className="card-item-title">Conta #{account.id}</h3>
+                <span className={`card-item-status ${account.ativa ? 'active' : 'inactive'}`}>
+                  {account.ativa ? 'Ativa' : 'Inativa'}
                 </span>
               </div>
-
-              <div className="account-info-row">
-                <div className="info-item">
-                  <span className="info-label">Usuário ID</span>
-                  <span className="info-value">{account.usuarioId || '-'}</span>
+              <div className="card-item-content">
+                <div className="card-item-row">
+                  <span className="card-item-label">Titular</span>
+                  <span className="card-item-value">{account.usuario?.nome || 'N/A'}</span>
+                </div>
+                <div className="card-item-row">
+                  <span className="card-item-label">Saldo</span>
+                  <span className="card-item-value">R$ {(account.saldo || 0).toFixed(2)}</span>
+                </div>
+                <div className="card-item-row">
+                  <span className="card-item-label">Usuário ID</span>
+                  <span className="card-item-value">#{account.usuario?.id || 'N/A'}</span>
                 </div>
               </div>
-
-              <button
-                onClick={() => handleViewAccount(account.id)}
-                className="btn-view-account"
-              >
-                Ver Detalhes
-              </button>
+              <div className="card-item-actions">
+                <button className="btn-sm" onClick={(e) => { e.stopPropagation(); navigate(`/accounts/${account.id}`); }}>Ver Detalhes</button>
+              </div>
             </div>
-          ))
-        )}
-      </div>
-
-      {totalPages > 1 && (
-        <div className="pagination">
-          <button
-            onClick={handlePreviousPage}
-            disabled={page === 0}
-            className="btn-pagination"
-          >
-            ← Anterior
-          </button>
-          <span className="pagination-info">
-            Página {page + 1} de {totalPages}
-          </span>
-          <button
-            onClick={handleNextPage}
-            disabled={page >= totalPages - 1}
-            className="btn-pagination"
-          >
-            Próxima →
-          </button>
+          ))}
         </div>
       )}
     </div>
@@ -147,3 +94,4 @@ function AccountsPage() {
 }
 
 export default AccountsPage;
+

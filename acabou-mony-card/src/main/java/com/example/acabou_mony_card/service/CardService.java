@@ -49,6 +49,14 @@ public class CardService {
     }
 
     @Transactional(readOnly = true)
+    public List<CardResponseDTO> listarTodosCartoes() {
+        return cartaoRepository.findAll()
+                .stream()
+                .map(cartaoMapper::toDto)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
     public List<CardResponseDTO> listarCartoesPorConta(Long contaId) {
         return cartaoRepository.findByContaId(contaId)
                 .stream()

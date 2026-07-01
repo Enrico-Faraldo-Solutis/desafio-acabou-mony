@@ -1,15 +1,15 @@
-.login-container {
+.register-container {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f35 50%, var(--primary-dark) 100%);
-  padding: 20px;
+  padding: 40px 20px;
   position: relative;
   overflow: hidden;
 }
 
-.login-container::before {
+.register-container::before {
   content: '';
   position: absolute;
   width: 400px;
@@ -21,7 +21,7 @@
   border-radius: 50%;
 }
 
-.login-container::after {
+.register-container::after {
   content: '';
   position: absolute;
   width: 300px;
@@ -33,7 +33,7 @@
   border-radius: 50%;
 }
 
-.login-card {
+.register-card {
   background: rgba(30, 41, 59, 0.9);
   border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 16px;
@@ -41,18 +41,18 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(99, 102, 241, 0.1);
   padding: 48px;
   width: 100%;
-  max-width: 420px;
+  max-width: 520px;
   position: relative;
   z-index: 1;
   animation: fadeIn 0.5s ease-out;
 }
 
-.login-header {
+.register-header {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.login-header .logo {
+.register-header .logo {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -60,11 +60,11 @@
   margin-bottom: 20px;
 }
 
-.login-header .logo-icon {
+.register-header .logo-icon {
   font-size: 36px;
 }
 
-.login-header h1 {
+.register-header h1 {
   color: var(--text-primary);
   font-size: 32px;
   font-weight: 700;
@@ -75,21 +75,21 @@
   background-clip: text;
 }
 
-.login-header p {
+.register-header p {
   color: var(--text-tertiary);
   font-size: 14px;
 }
 
-.login-form {
+.register-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .form-group label {
@@ -100,7 +100,7 @@
 }
 
 .form-group input {
-  padding: 14px 16px;
+  padding: 12px 16px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
   font-size: 14px;
@@ -126,16 +126,6 @@
   opacity: 0.6;
 }
 
-.success-message {
-  background: rgba(34, 197, 94, 0.1);
-  color: #86efac;
-  padding: 14px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  border-left: 4px solid #22c55e;
-  animation: slideIn 0.3s ease-out;
-}
-
 .error-message {
   background: rgba(239, 68, 68, 0.1);
   color: #fca5a5;
@@ -145,7 +135,8 @@
   border-left: 4px solid var(--danger-color);
   animation: slideIn 0.3s ease-out;
 }
-  .btn-primary {
+
+.btn-primary {
   background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
   padding: 14px 24px;
@@ -158,7 +149,7 @@
   margin-top: 8px;
   position: relative;
   overflow: hidden;
-  }
+}
 
 .btn-primary::before {
   content: '';
@@ -192,19 +183,19 @@
   cursor: not-allowed;
 }
 
-.login-footer {
+.register-footer {
   margin-top: 32px;
   text-align: center;
   font-size: 13px;
   color: var(--text-tertiary);
 }
 
-.login-footer p {
+.register-footer p {
   margin: 0;
   line-height: 1.6;
 }
 
-.login-footer a {
+.register-footer a {
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
@@ -213,7 +204,7 @@
   border-radius: 4px;
 }
 
-.login-footer a:hover {
+.register-footer a:hover {
   color: var(--primary-light);
   background: rgba(99, 102, 241, 0.1);
 }
@@ -240,17 +231,20 @@
   }
 }
 
-@media (max-width: 480px) {
-  .login-card {
-    padding: 32px;
+@media (max-width: 600px) {
+  .register-card {
+    padding: 32px 24px;
   }
 
-  .login-header h1 {
+  .register-header h1 {
     font-size: 24px;
   }
 
   .btn-primary {
     padding: 12px 20px;
   }
-}
 
+  .register-form {
+    gap: 16px;
+  }
+}

@@ -2,6 +2,12 @@ import api from './api';
 
 // Account Service - Conta endpoints
 export const accountService = {
+  // Create new account
+  createAccount: async (usuarioId) => {
+    const response = await api.post('/acabou-mony-account/contas', { usuarioId });
+    return response.data;
+  },
+
   // Get account balance by ID
   getAccountBalance: async (contaId) => {
     const response = await api.get(`/acabou-mony-account/contas/balance/${contaId}`);
@@ -51,3 +57,4 @@ export const userService = {
 };
 
 export default { accountService, userService };
+
